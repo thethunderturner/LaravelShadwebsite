@@ -7,8 +7,8 @@ use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
@@ -28,9 +28,10 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
         return $table
             ->query(CompatibilityList::query()->with('db'))
             ->defaultSort('updatedDate', 'desc')
-            ->paginated([15, 25, 50])
-            ->defaultPaginationPageOption(15)
             ->columns([
+                ViewColumn::make('cusa_image')
+                    ->label('Image')
+                    ->view('filament.tables.columns.cusa-image'),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable()
