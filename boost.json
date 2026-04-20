@@ -8,6 +8,8 @@
     "sail": false,
     "skills": [
         "laravel-best-practices",
+        "mcp-development",
+        "fluxui-development",
         "pest-testing",
         "tailwindcss-development"
     ]

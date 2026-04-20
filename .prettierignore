@@ -1,0 +1,5 @@
+.claude
+*.lock
+boost.json
+.mcp.json
+CLAUDE.md

@@ -6,6 +6,30 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-header: var(--color-white);
+    --color-root: var(--color-gray-100);
+    --color-border: var(--color-gray-300);
+    --color-card: var(--color-white);
+    --color-text: var(--color-zinc-900);
+
+    /*Compatibility colors*/
+    --color-status-playable: var(--color-green-500);
+    --color-status-ingame: var(--color-blue-500);
+    --color-status-menus: var(--color-violet-500);
+    --color-status-boots: var(--color-yellow-500);
+    --color-status-nothing: var(--color-red-500);
+
+    --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
+
+:root {
+    @variant dark {
+        --color-header: var(--color-gray-950);
+        --color-root: oklch(0.19 0.03 269.8 / 1);
+        --color-border: var(--color-slate-800);
+        --color-card: var(--color-slate-950);
+        --color-text: var(--color-white);
+    }
 }
