@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('compatibility_lists', function (Blueprint $table) {
+        Schema::create('compatibilitylist', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('code');
+            $table->string('title');
+            $table->string('version');
+            $table->string('type');
+            $table->string('status');
+            $table->string('os');
+            $table->date('createdDate'); // TODO: Change to use timestamps(). Also required to change the column in the database
+            $table->date('updatedDate');
         });
     }
 
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('compatibility_lists');
+        Schema::dropIfExists('compatibilitylist');
     }
 };

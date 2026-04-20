@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['code', 'title', 'version', 'typr', 'status', 'os', 'createdDate', 'updatedDate'])]
-#[Table('compatibilitylist')]
-class CompatibilityList extends Model
+#[Fillable(['reason'])]
+#[Table('errlist')]
+class ErrorList extends Model
 {
     //
 }

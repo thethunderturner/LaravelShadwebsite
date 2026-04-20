@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('compatibility_dbs', function (Blueprint $table) {
+        Schema::create('compatibilitydb', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('codedb');
+            $table->string('titledb');
+            $table->tinyInteger('parentalLevel');
+            $table->string('contentId');
+            $table->string('category');
+            $table->boolean('psVr');
+            $table->boolean('neoEnable');
         });
     }
 
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('compatibility_dbs');
+        Schema::dropIfExists('compatibilitydb');
     }
 };
