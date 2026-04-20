@@ -1,0 +1,372 @@
+---
+category: Releases
+description: shadps4 v0.11.0 relased!
+pubDate: 2025-09-17T21:00:00.000Z
+title: shadps4 v0.11.0 relased!
+---
+
+A brand new release just dropped in . As usual we have a lot of new features and bugfixes to this release with the most important that games that uses Unreal Engine are now start to booting and some of them are even playable. 
+
+Don't forget to visit our newest forum at : [https://shadps4.net/forums/](https://shadps4.net/forums/)
+
+Core
+
+\====
+
+\* mmap executable memory
+
+\* Zero top bits in INSERTQ/EXTRQ
+
+\* Fix read-only file unmaps on Windows
+
+\* Standardize RegisterLib names for HLE libraries
+
+\* Filesystem: Fix create flag handling in open
+
+\* If CONTENT\_ID is empty in param.sfo, try using TITLE\_ID as fallback
+
+\* Add an unreachable on hitting ud2 instead of getting stuck in an infinite loop
+
+\* Microphone support
+
+\* Only update configs when using a different build
+
+\* Core: Return error if DirectMemoryQuery address is too high
+
+\* Simple IPC for external control
+
+\* Filesystem: Fix error behavior for close calls on std handles
+
+\* Sockets fixes
+
+\* Add entries for . and .. in MntPoints::IterateDirectory
+
+\* Log user CPU, total RAM, and OS
+
+\* Filesystem: Directory-related fixes
+
+\* Memory: Align size and address in posix\_munmap
+
+\* Filesystem: Abstract handling of directory files
+
+\* Replace direct usage of wrgsbase and rdgsbase with a more portable solution
+
+\* config: Add present mode option.
+
+\* Game specific configs
+
+\* Improve memory address validation logic
+
+\* Remove checks for symbol version\_major and version\_minor
+
+\* Fix MXCSR and FPUCW registers on created threads
+
+\* Log error on MapMemory out of flexible memory case 
+
+\* Open a dummy audio input device if none is present in the system
+
+\* Ds4 Speaker Audio
+
+Libs
+
+\====
+
+\* libkernel: Add missing mprotect export
+
+\* IME fixes
+
+\* video\_out: Internal Resolution Support
+
+\* Implement sceKernelGetSystemSwVersion
+
+\* Implement sceAudio3dTerminate
+
+\* Implement sceAudioOutGetLastOutputTime
+
+\* Register posix\_rename
+
+\* Implement sceKernelError
+
+\* Using custom usb lib
+
+\* inet\_ntop and inet\_pton
+
+\* Extract netmask and default gateway from host system
+
+\* Implement simple DNS name resolution
+
+\* Return the number of samples enqueued in AudioOut
+
+\* Return an error before a pad is opened
+
+\* scePadResetOrientation
+
+\* Fix sceAudioOutOutputs
+
+\* Fixed RetrieveNetmask for windows
+
+\* Net: Fix various socket-related issues
+
+\* sys\_getpeername
+
+\* Implement ORBIS\_NET\_CTL\_INFO\_HTTP\_PROXY\_CONFIG
+
+\* Fix get/setsockopt levels
+
+\* libkernel: more network functions for OpenOrbis compatibility
+
+\* libSceAppContent: Use last 16 characters of DLC folder to determine entitlement label
+
+\* Make libSceRtc fully HLE
+
+\* Fixed green artifacts in movies/animations (ffmpeg)
+
+\* Select support
+
+\* libSceAppContent: Determine entitlement labels from additional content param.sfo
+
+\* Fix sceVoiceGetPortInfo
+
+\* Fix handling of RFC 3339 formatted dates
+
+\* libSceNpParty: Stub out functions with not-in-party behavior
+
+\* Add stubbed libSceNpProfileDialog library
+
+\* Better libSceMove stubs
+
+\* Better libSceCamera stubs
+
+\* Implement ORBIS\_NET\_SO\_ERROR\_EX in GetSocketOptions
+
+\* Improved libSceHmd stubs
+
+\* libSceHmdSetupDialog stubs
+
+\* libSceVrTracker stubs
+
+\* semaphore: Invert priority order
+
+\* semaphore: Fix determining wait status when canceled/deleted
+
+\* Implement send/recvmsg
+
+\* libkernel: Return EINVAL if mmap is called with length = 0
+
+\* SaveData fixes
+
+\* Handle null event flags in cancel and clear
+
+\* AF\_UNIX preliminary support
+
+\* Np libraries cleanup
+
+\* Implement sceKernelIsInSandbox, update OrbisSysModule Enum
+
+\* equeue: Few fixes for sceKernelWaitEqueue 
+
+\* Implement getargc and getargv
+
+\* Simple implementation of sceGnmUnmapComputeQueue
+
+\* kernel: Improvements to condvars.
+
+\* kernel: More thread code clean-up.
+
+Shader recompiler
+
+\=================
+
+\* Fix V\_ADDC\_U32 carry-out edge cases 
+
+\* Reorganize data share operations and implement GDS
+
+\* ir\_passes: Fold readlane with ff1 pattern
+
+\* Implement ff1 with subgroup ops
+
+\* Replace buffer pulling with attribute divisor for instance step rate
+
+\* Implement guest barycentrics
+
+\* Fix ff1\_i32\_b64 not accepting vcc as its argument
+
+\* attribute: Correct bary coord function
+
+\* Avoid clearing HTILE when shader contains address calculation
+
+\* Implement MUBUF instructions for shorts/bytes
+
+\* control\_flow\_graph: Treat empty conditional branch as noop
+
+\* Fix incorrect bary coord loads when unsupported
+
+\* Use VM bit for conditional discard
+
+\* translate: Correct instance id fetch in local shader
+
+\* V\_ALIGNBYTE\_B32 and V\_ALIGNBIT\_B32
+
+\* Rework sharp tracking for robustness
+
+\* Improve heuristic for attributes passed via ring buffers
+
+\* ir: Perform degamma in shader when sampler sets force\_degamma
+
+\* Implement V\_CMP\_GT\_U6
+
+\* Improve shader exports accuracy (part 1)
+
+\* Do not emit Layer when emulating primitive type with tessellation.
+
+\* vector\_interpolation: Address some assertions
+
+\* Support multiple attributes using the same load in vertex fetch shaders
+
+\* Handle S\_LSHL\_B32 in ParseCopyShader
+
+\* Initialize all ClipDistance and CullDistance values
+
+\* Handle ExecLo source in S\_FF1\_I32\_B64
+
+\* Apply float type for float buffer atomics
+
+\* constant\_propagation\_pass: Handle a few more bitwise instructions.
+
+\* Implement V\_ADD\_F64 and loading 64-bit float from SGPR.
+
+\* Handle offsets and format overrides in fetch shaders
+
+\* Relax dual source blending assert to allow up to two targets.
+
+\* Allow vector and scalar offset in buffer address arg to LoadBuffer/StoreBuffer
+
+\* Support PointSize and ViewportIndex attributes.
+
+\* image: Do not set storage usage for block-encoded formats
+
+GPU
+
+\===
+
+\* texture\_cache: Change depth resolve new image back to max of resources
+
+\* texture\_cache: Async download of GPU modified linear images
+
+\* buffer\_cache: Bring back upload batching and temporary buffer
+
+\* vk\_rasterizer: Set render area to window scissor when no framebuffers are bound
+
+\* renderer\_vulkan: Handle more miscellaneous GPU setting
+
+\* vk\_instance: Remove usage of depth clamp control
+
+\* liverpool\_to\_vk: Don't use remapped format for clear value
+
+\* vk\_pipeline\_cache: Add fallbacks for R8Srgb and B5G6R5
+
+\* texture\_cache: Clamp buffer image height to microtile height 
+
+\* vk\_rasterizer: Improve stencil clears
+
+\* texture\_cache: Do not modify mip height for copy in volume texture.
+
+\* video\_core: garbage collector (part 1)
+
+\* video\_core: Rework tile manager
+
+\* texture\_cache: Only queue image downloads if the image address is greater than zero.
+
+\* video\_core: Fix some struct comparisons.
+
+\* vk\_pipeline\_cache: Cleanup graphics key refresh
+
+\* renderer\_vulkan: Restore color write dynamic state
+
+\* vk\_graphics\_pipeline: Prioritize depth clip when separate clip/clamp control is not supported.
+
+\* vk\_pipeline\_cache: Add storage images to descriptor heaps
+
+\* vk\_scheduler: Properly initialize vulkan structures in RenderState.
+
+\* renderer\_vulkan: Ignore blend parameters when disabled.
+
+\* vk\_rasterizer: Set image flag bits in resolve
+
+\* liverpool: Write valid queries on PixelPipeStatDump
+
+\* amdgpu: Report GPU perf counter in GPU cycles.
+
+\* vk\_rasterizer: Only assert on primitive restart if performing indexed draw
+
+\* video\_core: Upload buffer memory around unmapped pages
+
+\* video\_core: Address various UE bugs
+
+\* video\_core: Check DB\_SHADER\_CONTROL register before performing depth exports 
+
+\* texture\_cache: Make sure that readback images are downloaded in time
+
+QT interface
+
+\============
+
+\* Extend Qt detection to support multiple drives
+
+\* Fix gui emulatorLanguage
+
+\* Volume slider that adjusts how loud games are on a global level
+
+\* Disable autoupdate on branches that aren't the official main
+
+\* Add default trophy sound
+
+\* Add toggle in the settings window for readbacks
+
+\* Apply cheat/patch only if AppVer matches game version
+
+\* Multiple controllers: Select active controller and set default controller
+
+\* Added customizable controller hotkeys
+
+\* Remapping Guis - more minor fixes
+
+\* Fix Play Time - Wasn't saving every minute
+
+\* Keybard/pad config common preset name is translated to target language
+
+\* Qt: update to 6.9.2 and remove Mac workaround
+
+\* Qt: enforce set order for kbm string mapping to prevent duplicate combo mappings
+
+\* Move QT plugins to the qtplugins folder on Windows QT builds
+
+\* Toggle to enable/disable logging
+
+\* Qt: prevent saving/canceling for remapping/hotkeys dialogs while waiting for inputs
+
+\* Add an option to change DLC path from the settings
+
+\* Use icons, music and background images of updates if available
+
+\* Qt: Add FSR options to settings GUI
+
+\* Increase the size of the description text box
+
+\* Log presets feature
+
+\* QT: TrophyViewer size adjustment and 'Log' tab translated
+
+\* QΤ: Add GUI for game-specific settings
+
+\* QT: Add the Log tab to 'Default tab when opening settings'
+
+\* Qt: Add descriptions for new experimental settings in GUI
+
+\* QT: Fix Patches 'Incompatibility Notice'
+
+\* Qt: Group game-specific and non-game-specific items in the same tabs
+
+\* QT: Note Vulkan SDK requirement for validation tooltips 
+
+Just visit our download page and don't forget to send your reports to the our compatibility list ([https://github.com/shadps4-compatibility/shadps4-game-compatibility](https://github.com/shadps4-compatibility/shadps4-game-compatibility) )

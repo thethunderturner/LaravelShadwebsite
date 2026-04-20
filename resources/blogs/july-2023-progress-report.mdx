@@ -1,0 +1,27 @@
+---
+heroImage: /src/assets/images/code-1839406_640.jpg
+category: Developing
+description: "Hi to all, Although progress is quite slow due to my primary work , there is some progress on shadps4…"
+pubDate: 2023-08-04T12:41:01.000Z
+title: "July 2023 progress report"
+---
+
+Hi to all,
+
+Although progress is quite slow due to my primary work , there is some progress on shadps4 emulator.
+
+The main focus of developing is on getting a simple ps4 sdk demo to work (videoout\_basic.elf) . This appears to be a quite simple graphical demo.
+
+So what is the progress on it so far?
+
+*   It loads using elf loader
+*   Resolve,patch and rellocate all neccesary libraries-functions in HLE . Most of the function are dummy atm.
+*   Executes code up to the first unimplemented HLE function (at the time running this report is sceKernelMapDirectMemory function.
+
+So what’s next?
+
+Implementing some more HLE functions and getting the demo proccess further. Optimal goal is to get it running by the end of August.
+
+Can it run/load other demos or commercial games?
+
+Well shadps4 supports elf,self loading but since developing is focused on that particular demo it probably won’t do something interesting . Most probably it will get stucked in resolving unimplemented HLE functions.

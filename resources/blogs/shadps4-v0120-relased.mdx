@@ -1,0 +1,74 @@
+---
+category: Releases
+description: shadps4 v0.12.0 relased!
+pubDate: 2025-10-30T22:00:00.000Z
+title: shadps4 v0.12.0 relased!
+---
+
+Happy halloween ppl! It is a special day today and what more special than having a brand new shadps4 release . Although it was announced that it Qt builds were gonna removed from 0.12.0 , we decided to release it for one last time . Starting from 0.12.1 , shadPS4 will be cli only , but we already have launchers for you ready , check the download section of the site.
+
+Don't forget to visit our newest forum at : [https://shadps4.net/forums/](https://shadps4.net/forums/)
+
+Enough talking here is the latest shadPS4 version and it's changes
+
+# Core
+
+\*physical backing for flexible and pooled memory allocation
+ \*Refactor direct memory handling
+ \*Memory: Implement sceKernelMemoryPoolGetBlockStats
+ \*Allow overlapping direct memory mappings
+ \*Memory code cleanup and further direct memory fixes
+ \*Handle various edge cases related to executable permissions.
+ \*Kernel.Fs: Device file cleanup and /dev/rng implementation
+ \*Lock linker mutex in RelocateAnyImports
+ \*Increase address space limits and rework Windows address space initialization
+ \*Fix alignment for mmap
+ \*Fix return for running out of flexible memory
+ \*Fix NoOverwrite flag behavior in MapMemory
+ \*Read-only file mmap fix
+
+# Libraries
+
+\*Net: Epoll support
+\*avplayer: implemented AddSourceEx, SetAvSyncMode, Pause and Resume
+\*avplayer: do not start the video multiple times
+\*ajm: handle ParseRiffHeader flag
+\*avplayer: fix play request state handling
+\*Implemented sceSystemServiceLoadExec
+\*Fixing missing png extraction from trophy files
+\*Implemented sceNpTrophyGetGameIcon
+\*audioout: Do not wait for data within timer.
+\*avplayer: remove maximum audio delay
+\*Use correct trophy folder for games with multiple trophy lists
+\*NpManager: Implement more request-related behavior
+\*NpAuth: Improved stubs
+\*Ime fixes
+\*Fixes scePlayGoDialog status stub
+
+# Video Core
+
+\*Handle mixed samples attachments
+\*Better handling of image copies with DmaData
+\*Fix some image copy and buffer offset validation errors.
+\*image: Improve enforcement of image copy layer rules
+\*Move HDR swapchain configuration to present thread.
+\*buffer\_cache: Bring back CPU path
+\*image\_info: Fix guest size calculation for linear render targets
+\*amdgpu: Split liverpool registers and cleanup
+
+# Shader recompiler
+
+\*Implement fallback path for missing shaderFloat16support
+\*Fix: V\_MUL\_I32\_I24 | V\_MUL\_U32\_U24
+
+# GUI
+
+\*Make UpdatePlayTime not depend on Qt
+\*Make sys\_modules folder configurable
+\*Add configurable extra memory
+\*Update Qt to 6.9.3
+\*Add CLI argument to launch the emulator with global config or with default settings
+\*IPC: commands for volume adjustment, input parsing, fsr, gamepad select
+\*Add informative update message for Qt build deprecation
+
+Just visit our download page and don't forget to send your reports to the our compatibility list ([https://github.com/shadps4-compatibility/shadps4-game-compatibility](https://github.com/shadps4-compatibility/shadps4-game-compatibility) )

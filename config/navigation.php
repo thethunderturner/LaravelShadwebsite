@@ -33,7 +33,7 @@ return [
         ['name' => 'Discord', 'href' => 'https://discord.gg/bFJxfftGW6', 'icon' => 'discord'],
         ['name' => 'GitHub', 'href' => 'https://github.com/shadps4-emu/shadPS4', 'icon' => 'github'],
         ['name' => 'Facebook', 'href' => 'https://www.facebook.com/shadps4', 'icon' => 'facebook'],
-        ['name' => 'X', 'href' => 'https://twitter.com/shadps4', 'icon' => 'x'],
-        ['name' => 'KoFi', 'href' => 'https://ko-fi.com/shadps4', 'icon' => 'kofi'],
+        ['name' => 'X', 'href' => 'https://twitter.com/shadps4', 'icon' => 'x-twitter'],
+        ['name' => 'KoFi', 'href' => 'https://ko-fi.com/shadps4', 'icon' => 'ko-fi'],
     ],
 ];

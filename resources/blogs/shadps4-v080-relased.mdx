@@ -1,0 +1,62 @@
+---
+category: Releases
+description: shadps4 v0.8.0 relased!
+pubDate: 2025-04-22T21:00:00.000Z
+title: shadps4 v0.8.0 relased!
+---
+
+Another exciting release from shadPS4 team coming today . This time our release is dedicated to one of our latest Uber Dev "stephen". A lot of new fixes , features have come up with this release let's sum some below.
+
+# Core
+
+* lseek: let the host OS set lseek errors
+* Filesystem code cleanup
+* Emulate sceKernelInternalMemory mapping
+* Fixed sceKernelAllocateDirectMemory and sceKernelAvailableDirectMemorySize
+
+# Libraries
+
+* sceDiscMap is now HLE.
+* Initial ngs2 HLE work.
+* Implement libusb passthrough
+* Proper ulobjmgr stubs
+* Initial Audio3d implementation
+* NpAuth library stub
+
+# GPU
+
+* Reset previous buffer label instead of current one
+* Handle compute packets that are split between the ends of two command buffers
+* Implement DmaDataSrc::MemoryUsingL2 and DmaDataDst::MemoryUsingL2
+* renderer\_vulkan: Use more depth-stencil dynamic state.
+* renderer\_vulkan: Only update dynamic state when changed.
+* renderer\_vulkan: Make some primitive state dynamic.
+* Implement sceVideoOutGetEventCount and sceVideoOutDeleteVblankEvent
+* vk\_rasterizer: Control mapped\_ranges access with shared lock.
+* renderer\_vulkan: Improve handling of required vs optional extensions.
+* vk\_rasterizer: Improve viewport depth calculations.
+* texture\_cache: Relax mismatched image type from assert to cache miss.
+* renderer\_vulkan: Support loading Vulkan layers on macOS SDL build.
+
+# Shader recompiler
+
+* Improve divergence handling and readlane elimintation
+* Add S\_SETPRIO to EmitFlowControl
+* Use VK\_AMD\_shader\_trinary\_minmax when available
+* resource\_tracking\_pass: Add heuristic to detect incorrectly tracked buffer sharp
+* Implement S\_FLBIT\_I32\_B32 and V\_MUL\_HI\_I32
+* Implement S\_SUBB\_U32 instruction
+* Fill in IMAGE\_GATHER4\_\* variants in table
+* Implementing DS\_SUB\_U32, DS\_INC\_U32, DS\_DEC\_U32.
+* Implement SET\_PC\_B64 instruction
+
+# GUI
+
+* Add option to enable/disable game folders individually
+* Handle "-patch" as the suffix for game update folders
+* Trophy Viewer - Select Game
+* Removed fpkg support.
+* Fix support for unicode paths for game install directories
+* As usual a lot of new translations
+
+Full Changelog: [v.0.7.0...v.0.8.0](https://github.com/shadps4-emu/shadPS4/compare/v.0.7.0...v.0.8.0)Get it on our download page , and don’t forget to check our compatibility list

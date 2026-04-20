@@ -1,0 +1,158 @@
+---
+category: Releases
+description: "A new release v0.2.0 codename validptr just dropped. There are excitement new features in this release (also you will find…"
+pubDate: 2024-08-15T20:41:28.000Z
+title: "Shadps4 v0.2.0 just dropped"
+---
+
+A new release v0.2.0 codename validptr just dropped. There are excitement new features in this release (also you will find that Red dead redemption , Dark souls , bloodborne has some updated status on this release).
+
+You can download the new release from [download](https://shadps4.net/index.php/downloads/) page.
+
+A short description of changes :
+
+*   Adding macOS support
+*   Big shader recompiler improvements
+*   Core improvements
+*   GUI improvements
+
+And A large one 😀
+
+What’s Changed
+--------------
+
+*   shader\_recompiler: Implement most integer image atomics, workgroup barriers and shared memory load/store by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/231
+*   Recompiler: sampler patching by @psucien in https://github.com/shadps4-emu/shadPS4/pull/236
+*   Fix ShowSplash size by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/235
+*   Misc Fixes by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/233
+*   shader\_recompiler: Check usage before enabling capabilities by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/245
+*   CMakeLists.txt cleanup by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/244
+*   Misc fixes 3 by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/239
+*   Create shortcut by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/246
+*   fix linux again by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/254
+*   Graphics: missing features and fixes by @psucien in https://github.com/shadps4-emu/shadPS4/pull/253
+*   Eliminate compiler warning by @OFFTKP in https://github.com/shadps4-emu/shadPS4/pull/264
+*   Fix sceAudioOutOpen not handling audio param attributes by @viniciuslrangel in https://github.com/shadps4-emu/shadPS4/pull/267
+*   Added Legacy Min/Max ops by @ItsStolas in https://github.com/shadps4-emu/shadPS4/pull/266
+*   Update building-linux.md with full instructions by @BigTreezZ in https://github.com/shadps4-emu/shadPS4/pull/260
+*   Improve physical device selection in Vulkan renderer by @viniciuslrangel in https://github.com/shadps4-emu/shadPS4/pull/247
+*   add V\_MAD\_U32\_U24 by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/262
+*   fix shortcut name with unaccepted characters by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/269
+*   impl V\_CMP\_CLASS\_F32 common filter masks by @viniciuslrangel in https://github.com/shadps4-emu/shadPS4/pull/276
+*   Update building-linux.md with thread numbers by @BigTreezZ in https://github.com/shadps4-emu/shadPS4/pull/275
+*   More HLE stuff and fixes by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/273
+*   Adding Bloodborne screenshot by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/278
+*   HR Timers support and event queue refactoring by @psucien in https://github.com/shadps4-emu/shadPS4/pull/277
+*   Filesystem errors and Base Array Layers by @vladmikhalin in https://github.com/shadps4-emu/shadPS4/pull/280
+*   Misc implementations and fixes. by @polybiusproxy in https://github.com/shadps4-emu/shadPS4/pull/250
+*   Update CMakeLists.txt to fix compilation error by @BigTreezZ in https://github.com/shadps4-emu/shadPS4/pull/282
+*   Fixed an issue with number of components of shader attributes by @vladmikhalin in https://github.com/shadps4-emu/shadPS4/pull/283
+*   Fix Linux builds by @polybiusproxy in https://github.com/shadps4-emu/shadPS4/pull/284
+*   shader\_recompiler/frontend: Implement opcodes by @polybiusproxy in https://github.com/shadps4-emu/shadPS4/pull/289
+*   Missing graphics features for flOw & Flower by @psucien in https://github.com/shadps4-emu/shadPS4/pull/292
+*   Fix pthread deprecation warnings by @jas0n098 in https://github.com/shadps4-emu/shadPS4/pull/290
+*   gnmdriver: Implement shader functions by @polybiusproxy in https://github.com/shadps4-emu/shadPS4/pull/287
+*   Various linux fixes by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/293
+*   Return EBUSY from sceKernelPollEventFlag instead of ETIMEDOUT. by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/299
+*   Implemented load\_buffer\_format\_\* conversions by @vladmikhalin in https://github.com/shadps4-emu/shadPS4/pull/295
+*   Move “game\_data” to RW directory inside user folder for linux by @qurious-pixel in https://github.com/shadps4-emu/shadPS4/pull/252
+*   code: Fixup some regressions by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/300
+*   kernel: Implement posix\_pthread\_once by @dima-xd in https://github.com/shadps4-emu/shadPS4/pull/297
+*   Fixed buffer\_store\_\* regression by @vladmikhalin in https://github.com/shadps4-emu/shadPS4/pull/302
+*   Misc Fixes (forgot the number) by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/281
+*   spirv: Address some regressions in buffer loads by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/304
+*   Surface management rework (1/3) by @psucien in https://github.com/shadps4-emu/shadPS4/pull/307
+*   vk\_scheduler: Add api for defering operations by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/311
+*   Add macOS support by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/294
+*   Add sceKernelGetDirectMemoryType, update sceKernelReserveVirtualRange by @Borchev in https://github.com/shadps4-emu/shadPS4/pull/312
+*   Replace remaining uses of `QDir::currentPath() / "user"` with `GetUserPath(UserDir)`. by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/314
+*   docs: Syntax highlighting for the example code by @noxifoxi in https://github.com/shadps4-emu/shadPS4/pull/316
+*   Fix macOS builds by @VasylBaran in https://github.com/shadps4-emu/shadPS4/pull/317
+*   Install x86\_64 MoltenVK from Homebrew. by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/318
+*   Fixed the button- PKG patch version is older by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/319
+*   address\_space: Fix windows placeholder mapping by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/323
+*   memory: Cleanups and refactors by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/324
+*   Misc Fixes 7 by @raziel1000 in https://github.com/shadps4-emu/shadPS4/pull/320
+*   BUFFER\_STORE\_DWORDX2 by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/325
+*   semaphore: Yet another race condition fix by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/327
+*   64 bits OP, impl V\_ADDC\_U32 & V\_MAD\_U64\_U32 by @viniciuslrangel in https://github.com/shadps4-emu/shadPS4/pull/310
+*   fix tls patch on windows by @viniciuslrangel in https://github.com/shadps4-emu/shadPS4/pull/328
+*   Move presentation to separate thread/improve sync by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/303
+*   Surface management rework (2/3) by @psucien in https://github.com/shadps4-emu/shadPS4/pull/329
+*   log improvement ThrowInvalidType by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/330
+*   Implement some pthread calls by @dima-xd in https://github.com/shadps4-emu/shadPS4/pull/332
+*   Fixup for detiler artifacts on macOS by @VasylBaran in https://github.com/shadps4-emu/shadPS4/pull/335
+*   Add sem\_timedwait polyfill for macOS. by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/336
+*   kernel: Implement sceKernelSetVirtualRangeName by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/338
+*   Fix SearchFree function bug by @Borchev in https://github.com/shadps4-emu/shadPS4/pull/339
+*   Don’t download unnecessary DLLs by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/341
+*   Add pthread\_attr\_getstacksize thunk by @Borchev in https://github.com/shadps4-emu/shadPS4/pull/343
+*   shader\_recompiler: Small instruction parsing refactor/bugfixes by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/340
+*   Reorganization of includes by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/348
+*   core: Implement sceRandomGetRandomNumber by @dima-xd in https://github.com/shadps4-emu/shadPS4/pull/350
+*   Adding macOS to readme + minor changes by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/351
+*   SaveData Fixes by @raziel1000 in https://github.com/shadps4-emu/shadPS4/pull/346
+*   Added Git version info by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/355
+*   Better logo for shadPS4 by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/352
+*   Add macOS icon. by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/356
+*   reuse: fix license for externals by @abouvier in https://github.com/shadps4-emu/shadPS4/pull/358
+*   Minor Qt GUI update by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/363
+*   SampleCountFlagBits::e16 – GetGpuClock64 by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/360
+*   add-SurfaceFormat by @DanielSvoboda in https://github.com/shadps4-emu/shadPS4/pull/365
+*   video\_core: Minor fixes by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/366
+*   video\_core: Implement guest buffer manager by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/373
+*   Workflows cleanup + misc fixes by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/371
+*   qt\_gui: Added double-click game icon to start game by @ElBread3 in https://github.com/shadps4-emu/shadPS4/pull/379
+*   qt\_gui: Refreshing game list after install directory change by @SamuelFontes in https://github.com/shadps4-emu/shadPS4/pull/380
+*   361: Game directory window appears every time by @SamuelFontes in https://github.com/shadps4-emu/shadPS4/pull/381
+*   revert some sdl switches by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/382
+*   Kernel-Related Fixes by @StevenMiller123 in https://github.com/shadps4-emu/shadPS4/pull/386
+*   Update latest build instructions.md by @SleepingSnakezzz in https://github.com/shadps4-emu/shadPS4/pull/385
+*   Submodules updates + misc fixes by @georgemoralis in https://github.com/shadps4-emu/shadPS4/pull/368
+*   gui: Implement settings dialog by @dima-xd in https://github.com/shadps4-emu/shadPS4/pull/390
+*   Gnmdriver: More functions by @psucien in https://github.com/shadps4-emu/shadPS4/pull/410
+*   Video Core: debug tools by @psucien in https://github.com/shadps4-emu/shadPS4/pull/412
+*   Build stabilization by @psucien in https://github.com/shadps4-emu/shadPS4/pull/413
+*   Enable VK\_EXT\_robustness2 nullDescriptor only if supported. by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/419
+*   Add partial unmap support by @Borchev in https://github.com/shadps4-emu/shadPS4/pull/322
+*   thread\_management.cpp: Various Mandatory Threading Fixes | Resolve #398 by @lzardy in https://github.com/shadps4-emu/shadPS4/pull/394
+*   spirv: fix image sample lod/clamp/offset translation by @viniciuslrangel in https://github.com/shadps4-emu/shadPS4/pull/402
+*   video\_core: Crucial buffer cache fixes + proper GPU clears by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/414
+*   Fix some Vulkan validation errors on macOS. by @squidbus in https://github.com/shadps4-emu/shadPS4/pull/420
+*   Basic gamepad support through SDL by @counter185 in https://github.com/shadps4-emu/shadPS4/pull/407
+*   video\_core: Various fixes by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/423
+*   qt-gui: Added GPU device selection functionality by @SamuelFontes in https://github.com/shadps4-emu/shadPS4/pull/399
+*   video\_core: CPU flip relay by @psucien in https://github.com/shadps4-emu/shadPS4/pull/415
+*   core/memory: Fix error on virtual queries of reserved regions by @polybiusproxy in https://github.com/shadps4-emu/shadPS4/pull/429
+*   spirv: Simplify shared memory handling by @raphaelthegreat in https://github.com/shadps4-emu/shadPS4/pull/427
+*   scePthreadAttrSetstack implementation by @StevenMiller123 in https://github.com/shadps4-emu/shadPS4/pull/391
+*   core: misc changes by @dima-xd in https://github.com/shadps4-emu/shadPS4/pull/430
+*   shader\_recompiler: basic implementation of `BUFFER_STORE_FORMAT_` by @psucien in https://github.com/shadps4-emu/shadPS4/pull/431
+*   Ability to change username by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/432
+*   Qt-GUI: Adding User Name selection by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/440
+*   gpu: handle primitive restart index register by @viniciuslrangel in https://github.com/shadps4-emu/shadPS4/pull/438
+*   Qt-GUI: Cleaning the option menu by @Xphalnos in https://github.com/shadps4-emu/shadPS4/pull/443
+
+New Contributors
+----------------
+
+*   @DanielSvoboda made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/235
+*   @viniciuslrangel made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/267
+*   @ItsStolas made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/266
+*   @BigTreezZ made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/260
+*   @vladmikhalin made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/280
+*   @polybiusproxy made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/250
+*   @jas0n098 made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/290
+*   @squidbus made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/299
+*   @dima-xd made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/297
+*   @Borchev made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/312
+*   @noxifoxi made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/316
+*   @VasylBaran made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/317
+*   @ElBread3 made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/379
+*   @SamuelFontes made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/380
+*   @StevenMiller123 made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/386
+*   @SleepingSnakezzz made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/385
+*   @lzardy made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/394
+*   @counter185 made their first contribution in https://github.com/shadps4-emu/shadPS4/pull/407
+
+**Full Changelog**: https://github.com/shadps4-emu/shadPS4/compare/0.1.0…v.0.2.0

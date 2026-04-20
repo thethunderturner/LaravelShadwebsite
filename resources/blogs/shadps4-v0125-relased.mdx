@@ -1,0 +1,46 @@
+---
+category: Releases
+description: shadps4 v0.12.5 relased!
+pubDate: 2025-11-06T22:00:00.000Z
+title: shadps4 v0.12.5 relased!
+---
+
+Some would say, "why a new release this early"? While releases came every 2-3 months before, the previous 0.12.0 release had an input change, which made multiple games unplayable, so we needed to patch it quite early. With that, some other interesting features and bugfixes came from development continuing as before, so enjoy ;)
+
+Don't forget to visit our newest forum at : [https://shadps4.net/forums/](https://shadps4.net/forums/)
+
+Enough talking here is the latest shadPS4 version and it's changes
+
+# Core
+
+* Fix divide by zero in kernel time
+* Reverted controller change from 0.12.0 since it appears it breaks a lot of games
+* Fix patches being applied multiple times redundantly
+* Fix game arguments not being passed under a certain condition
+* Simulate write-only file access with read-write access
+* filesystem: return st\_mtim in posix\_stat (fixes RB4 / CUSA02901 DLC crash)
+* ImGui: keep drawing when there's a pending change\_layer
+
+# Libraries
+
+* usbd: Implement usb backend system
+* usbd: Emulated Skylander Portal Backend
+* usbd: Add Infinity Base Backend
+* usbd: Added Dimension Toypad
+* Added get\_authinfo
+* HttpLib: Implemented a few more functions
+* Initial font lib implementation
+* Better return stub for sceNetPoolCreate
+* Libkernel: Implement/stub some functions
+
+# GPU
+
+* buffer\_cache: smaller regions
+* add null gpu notice
+* Implement sceGnmDrawInitToDefaultContextStateInternal functions
+
+# Qt
+
+* Remove Qt from emulator - Using lauchers from now on
+
+Just visit our download page and don't forget to send your reports to the our compatibility list ([https://github.com/shadps4-compatibility/shadps4-game-compatibility](https://github.com/shadps4-compatibility/shadps4-game-compatibility) )

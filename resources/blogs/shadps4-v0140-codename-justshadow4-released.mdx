@@ -1,0 +1,62 @@
+---
+category: Releases
+description: shadps4 v0.14.0 relased!
+pubDate: 2026-02-06T22:00:00.000Z
+tags:
+  - Speed Increase
+  - Features
+  - Game Fixes
+title: shadps4 v0.14.0 - codename JustShadow4 released!
+---
+
+Greeting fellow users , testers , devs.
+
+Here is a brand new release from shadPS4 , It took as some time but some nice features are here so we wanted to share them with all of you out there . This new release brings some more compatiblity with games and several bug fixes. You can check the list belowThank you all for your support!
+
+Don't forget to visit our newest forum at : [https://shadps4.net/forums/](https://shadps4.net/forums/)
+
+Enough talking here is the latest shadPS4 version and it's changes
+
+## Core
+
+* Added thread name to log lines
+* Added global emulator state class
+* Corrected physical based handling for memory pools
+* Add libSceRtc, libSceJpegDec, libSceJpegEnc, and libScePngEnc LLEs
+* Changing the mouse speed does not affect the mouse speed offset
+* Added libSceAudiodec to lle modules list
+* Introducing key\_manager for storing encryption keys
+* Miscellaneous memory fixes and slight optimizations
+* Added new cli parser using CLI11
+* Kernel.Vmm: Fix bug with VMA physical area tracking
+* Fixed float parsing in memory patcher
+
+## Libraries
+
+* Fixed dialog text input in IME dialog
+* Stubbed libSceRudp
+* Stubbed libsceNpWebApi2
+* Lib.Audio3d: sceAudio3dGetDefaultOpenParameters fix
+* Improved path detection in Avplayer
+* implemented sceImeDialogGetPanelSizeExtended in Ime Dialog
+* Added NpTus stub
+* Added pngenc HLE
+* Skip stdin fd for want\_read in select
+* Prevent posix\_pthread\_mutexattr\_settype from setting invalid mutex types
+* ajm mp3: check frame size on every frame
+
+## GPU
+
+* Small readback optimization
+* Small fixes regarding GDS
+* Prevent Rasterizer::IsMapped from returning true for memory ranges that wrap the address space
+
+## Shader recompiler
+
+* VS clip distance emulation for NVIDIA GPUs
+* Implemented V\_LSHR\_B64
+* Implemented V\_CMP\_OP\_F64
+* Implemented V\_FFBH\_I32
+* fix for incorrectly outputted attribute if cdist emulation is not needed
+
+Just visit our download page and don't forget to send your reports to the our compatibility list ([https://github.com/shadps4-compatibility/shadps4-game-compatibility](https://github.com/shadps4-compatibility/shadps4-game-compatibility) )

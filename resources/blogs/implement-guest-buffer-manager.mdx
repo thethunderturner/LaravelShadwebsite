@@ -1,0 +1,36 @@
+---
+heroImage: /src/assets/images/code-1839406_640.jpg
+category: Developing
+description: "What problem does this solve Up until this point main branch used a host memory stream buffer for making all…"
+pubDate: 2024-08-08T20:28:56.000Z
+title: "Implemented guest buffer manager"
+---
+
+### What problem does this solve
+
+Up until this point main branch used a host memory stream buffer for making all resources accessible to the GPU. This is because AMD hardware has very small alignment requirements for both uniform and storage buffers (only 4 bytes) while nvidia has 64/16 respectively. The device local-host visible part of memory is also too small for most systems to serve this purpose, and we probably need it for better things.
+
+This adds a ton of overhead to GPU emulation as all buffer bindings need to memcpy a (sometime large) chunk of memory to the stream buffer. It was also slow as GPU is not using VRAM for fast access. It also didn’t work for storage buffers where the writes would be lost, as there was no way of preserving them in the volatile buffer.
+
+This PR aims to solve most of the these issues by keeping a GPU side mirror of guest address space for the GPU to access. It uses write protection to track any modifications and will re-sync the ranges on demand when needed. It’s still a bit incomplete though in ways I will cover more below. Seems to fix flicker on RDR with AMD gpus, but it still persists on NVIDIA which needs more investigation.
+
+### Basic design
+
+In terms of operations the most important is searching for buffers as this is done multiple times per draw. Tracking page dirtiness must be fast as well. Insertion/deletion of buffers should also be fast but this happens more rarely than the other operations.
+
+For page tracking we employ a bit-based tracker with 4KB granularity, same as the host page size we target. It works on 2 levels; each WordManager is responsible for tracking 4MB of virtual address space and is created on demand when a particular region is invalidated. The MemoryTracker will iterate each manager that touches the region and gather all dirty ranges from each one. All this uses bit operations and avoids heap allocations, so it’s quite fast compared to an interval set.
+
+For the buffer cache, we cache buffers with host page size granularity. This makes things easier as we can avoid having to manage buffer overlaps; each page is exclusively owned by a buffer at a time. Buffers are stored in a multi level page table that covers (most) of the virtual address space and has comparable performance to a flat array access, but also using far less memory in the process. While at it, I’ve also switched the texture cache to use the same page table, as it should be faster than the existing hash map.
+
+Every time we fetch a buffer, we check if the region is CPU dirty and build a list of copies needed to validate the buffer from CPU data. The data is copied to a staging buffer and the buffer is validated. I’ve added a small optimization in this area, specially for small uniform buffers whose page has not been gpu modified. For those we can skip cached path and directly copy data into device local-host visible stream buffer to avoid a potential renderpass break in games that update uniforms often. Buffer upload reordering is also a potential future optimization, but that will matter more on tiled GPUs I imagine.
+
+GPU modification tracking is partially implemented. The switch to cached buffer objects also raises the issue of alignment again. An easy solution would be to force SSBOs in most cases but still has cases where alignment of 16 is not satisfied. Switching to device buffer address is also possible, but would probably result in performance degradation on NVIDIA hardware, as it has fixed function binding points for UBOs/SSBOs and hardware probably prefers you use them.  
+So on each buffer bind we check the offset and align it down if necessary, adding the offset into a push constant block that gets added into every buffer access. This results in a bit more overhead during each buffer access but I believe its the simplest approach at the moment without sacrificing much performance.
+
+### Some notes on potential expansions
+
+The current design should work on any modern GPU. However could also take advantage of ReBar here in many ways. The simplest way is allocating all buffers in device local-host visible memory and perform as many updates inline as possible.  
+A more advanced way to make use of it would be a Linux only technique that also uses the extremely new extension  
+VK\_EXT\_map\_memory\_placed. This allows us to tell vkMapMemory the exact virtual address to map our buffer. So we can use this to map GPU memory, directly into our virtual address space, avoiding the need of page dirty tracking almost entirely.
+
+The cache also makes no attempt to preserve GPU modified memory regions when a CPU write occurs to unrelated part of the same page. This means that the next time the buffer is used, part or all of the buffer will get trashed by CPU memory. This is a complex problem to solve as guest gives us little indication of when it wants to sync so it is left for later.

@@ -1,0 +1,220 @@
+---
+category: Releases
+description: shadps4 v0.10.0 relased!
+pubDate: 2025-07-05T21:00:00.000Z
+title: shadps4 v0.10.0 relased!
+---
+
+A brand new release just dropped in . As usual we have a lot of new features and bugfixes to this release making even more games reaching ingame and some of the are even playable :)
+
+I will let you figure out the rest , here is a short list of updates
+
+Don't forget to visit our newest forum at : [https://shadps4.net/forums/](https://shadps4.net/forums/)
+
+Core
+
+\====
+
+\- devtools: Add Module Viewer
+
+\- equeue: fix WaitEqueue assert on nullptr and move small timer check to WaitForEvents
+
+\- Memory Cleanup & Fixes (like, a lot of them)
+
+\- Pthread affinity fixups
+
+\- Emulate libSceGnmDriver's init behavior
+
+\- equeue: Fix passing user data in user-triggered equeue events
+
+\- memory: Reduce clamp threshold to 2MB
+
+\- Improved sceKernelMapNamedFlexibleMemory logging and add misc function exports
+
+\- cpu\_patches: Patch movntss and movntsd
+
+\- equeue: HrTimer fixes
+
+\- filesystem: Fixes for posix\_rename and write
+
+\- input: Silence unmapped keybind mappings and add XBox paddles
+
+\- input: Replace Back Button Behaviour with a rebindable solution for touchpad left, right and center
+
+\- input: Emulate motion controls with a mouse
+
+\- input: Code and documentation cleanup
+
+\- kernel: Check returned module in sceKernelGetModuleInfoFromAddr
+
+\- bit\_array: Remove non const operator\~
+
+\- settings: Update outdated config files on startup
+
+Libs
+
+\====
+
+\- Added libSceCompanionUtil, libSceVoice stubs
+
+\- net: Implemented sceNetInetNtop
+
+\- pad: Fix touchpad handling and change gyro calculation
+
+\- np\_manager: Add option to fake user being signed in to PSN
+
+\- zlib: Fix request queues
+
+\- video\_out: fix sceVideoOutGetResolutionStatus error behavior
+
+\- videodec2: Update structs to match newer firmwares
+
+\- np\_trophy: Change initial context and handle values
+
+\- np\_trophy: Fix potential out of bound crash
+
+\- kernel: Stub out SetGPO and GetGPI
+
+\- ngs2: Initialize system handle in HLE Ngs2 library
+
+\- video\_out: Add alternate code paths for handling legacy struct behavior in sceVideodec2GetPictureInfo
+
+Shader recompiler
+
+\=================
+
+\- Fix incorrect float type on FPRecip64
+
+\- Implemented opcodes: V\_CVT\_F64\_U32, V\_RCP\_LEGACY\_F32, S\_FLBIT\_I32\_B64, BUFFER\_ATOMIC\_CMPSWAP, DS\_READ\_U16, DS\_WRITE\_B16, DS\_ADD\_U64, BUFFER\_ATOMIC\_SMAX\_X2, BUFFER\_ATOMIC\_\<U|S>\<MAX|MIN>\_X2 and V\_CMP\_EQ\_U64
+
+\- Misc opcode fixes
+
+\- Handle R128 bit in MIMG instructions
+
+\- Provide custom border color to samplers
+
+\- Implement dual source blending
+
+\- Implement linear interpolation support
+
+\- Better handling of geometry shader scenario G
+
+\- Patch SRT walker on segfault
+
+\- Cleanup fragment attribute handling
+
+\- Various fixes to shared memory and atomics
+
+\- Reduce cases where shared memory to buffer pass is needed
+
+\- Fix shared memory definition when only one type is used
+
+\- Handle immediate inline samplers
+
+\- Fix some shared memory accesses when workgroup struct is omitted
+
+\- Implement buffer atomic fmin/fmax instructions
+
+\- Fix handling unbound depth image
+
+\- Optimize general case of buffer addressing
+
+\- Mark image as written when its used with atomics
+
+GPU
+
+\===
+
+\- video\_core: Implement Direct Memory Access
+
+\- Fix image extent in buffer copy to image
+
+\- texture\_cache: Handle overlap with equal address and different tiling mode
+
+\- liverpool: Stub PM4 opcodes 0x8E (GetLodStats) and 0x20 (SetPredication)
+
+\- liverpool: Implement PM4 opcode 0x22 (CondExec)
+
+\- texture\_cache: Fix ExpandImage behaviour
+
+\- buffer\_cache: Better image search for buffer validation
+
+\- texture\_cache: Handle compressed views of uncompressed images
+
+\- buffer\_cache: Inline data to cpu unless gpu modified
+
+\- tile\_manager: Downgrade assert to error 
+
+\- texture\_cache: Basic handling of partially resident images
+
+\- liverpool: Handle PM4 type 2 in acb
+
+\- vulkan: Fix two validation errors introduced by shared memory changes
+
+\- texture\_cache: Implement color\<->depth copies
+
+\- buffer\_cache: Bump device local staging buffer size
+
+\- texture\_cache: Implement color to multisampled depth blit pass
+
+\- vulkan: Enable sampleRateShading
+
+\- vulkan: Log improper image format uses
+
+\- video\_core: Page manager/region manager optimization
+
+\- video\_core: Page manager and memory tracker improvements
+
+\- vk\_rasterizer: Use shared\_first\_mutex
+
+\- vector\_alu: Improve handling of mbcnt append/consume patterns
+
+\- buffer\_cache: Fix various thread races on data upload and invalidation
+
+GUI
+
+\===
+
+\- translations: A yes amount of Crowdin updates
+
+\- auto\_update: Fix Changelog Error
+
+\- game\_list: Set Minimum Icon Size List to 48
+
+\- qt: Update to 6.9.1
+
+\- qt: save gui settings to separate file
+
+\- remapping\_gui: If duplicate unique inputs found, show which buttons have duplicates
+
+\- remapping\_gui: Update gui with new touchpad inputs
+
+\- game\_list: Favorites in the game list
+
+\- remapping\_gui: Rewrite the Controller menu and add minor fixes to the Keyboard & Mouse one
+
+Misc:
+
+\=====
+
+\- fork\_detection: Fix SSH remote links
+
+\- building: Add missing dependency for Fedora
+
+\- launch: Launch games by providing their folder instead of the eboot path
+
+\- launch: Add option to ignore game patch
+
+\- building: Changed package name to openal-soft-devel reflecting the fedora name package change
+
+\- ci: Work around Qt issue on new Xcode
+
+\- building: add CMakePresets.json and expand the number of configurations
+
+\- building: Update note on recursive cloning
+
+\- building: Autodetect Qt install path on Windows
+
+As always, you can check out the full changelog \[here]\(https\://github.com/shadps4-emu/shadPS4/compare/v.0.9.0...v.0.10.0).
+
+The big new feature this release brings with it is readbacks, which emulates shared memory on the PS4 by reading back memory that was modified on the GPU back to the CPU side, enabling a lot more games to function properly, fixing vertex explosions in Bloodborne and similar games, almost fully fixing climbing on Trico in The Last Guardian, and much, much more. It isn't enabled by default though, you'll have to turn it on manually in the config file yourself, as this is still a very experimental feature, and will break some games, plus it comes with a not insignificant hit to performance as well.

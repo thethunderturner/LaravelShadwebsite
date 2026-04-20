@@ -1,0 +1,51 @@
+---
+category: Releases
+description: "A new release just dropped , there are plenty of fixes i will give a small list of what is…"
+pubDate: 2024-10-31T18:40:05.000Z
+title: "shadPS4 v0.4.0 just dropped"
+---
+
+A new release just dropped , there are plenty of fixes i will give a small list of what is fixed since it’s general a lot of fixes. A lot of games now work (gravity rush remastered is probably one of my favourites) . So take a look on the download page and enjoy the new release 🙂
+
+List of changes:
+
+*   shader recompiler fixes
+*   Emulated support for cpus that doesn’t have SSE4.2a (intel cpus)
+*   Frame graph + Precise 60 fps timing
+*   Save data: fix nullptr & concurrent file write
+*   Auto Update
+*   Error dialog implementation
+*   Swapchain recreation and window resizing
+*   Add playback of background/title music in game list
+*   kernel: Quiet sceKernelWaitEventFlag error log on timeout
+*   Improve keyboard navigation in game list
+*   core/memory: Pooled memory implementation
+*   Fix PKG loading
+*   replace trophy xml assert with error
+*   Refactor audio handling with range checks, buffer threshold, and lock
+*   audio\_core: Fix return value types and shift some error handling to library
+*   Devtools: PM4 Explorer
+*   Initial support of Geometry shaders
+*   Working touchpad support
+*   net: Stub sceNetErrnoLoc
+*   Add support to click touchpad using back button on non PS4/5 controllers
+*   Multiple Install Folders
+*   Using a more standard data directory for linux
+*   video\_core: Implement sceGnmInsertPushColorMarker
+*   ime\_dialog: Initial implementation
+*   Network libs fixes
+*   Use GetSystemTimePreciseAsFileTime to fix fps timing issues
+*   Added adaptive mutex initializer
+*   Small Np + trophy fixes
+*   Separate Updates from Game Folder
+*   Minor Fixes for Separate Update Folder
+*   AvPlayer: Do not align w/h to 16 with vdec2
+*   Improve sceSystemServiceReceiveEvent stub
+*   renderer\_vulkan: Commize and adjust buffer bindings
+*   Add poll interval to libScePad
+*   Add more surface format mappings.
+*   vulkan: Report only missing format feature flags.
+*   IME implementation
+*   Videodec2 implementation
+*   path\_util: Make sure macOS has current directory set and clean up path code.
+*   Load LLE modules from sys\_modules/GAMEID folder

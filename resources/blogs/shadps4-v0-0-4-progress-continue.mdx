@@ -1,0 +1,34 @@
+---
+category: Developing
+description: "We have some interesting pr’s this week . First we got Rewrite videoout library and bringup new vulkan backend from…"
+pubDate: 2024-04-30T12:13:04.000Z
+title: "Shadps4 v0.0.4 progress (continue)"
+---
+
+We have some interesting pr’s this week .
+
+First we got [Rewrite videoout library and bringup new vulkan backend](https://github.com/shadps4-emu/shadPS4/pull/111) from [The Turtle](https://github.com/raphaelthegreat)
+
+On master the video/graphics is relatively hard to understand as it’s split into multiple folders and directories without much cohesion on what every does. In addition the texture cache is extremely basic and works based on hashing: it will track changes to memory regions by computing its hash. This is fine for simple demos but when real games are put to the test, hashing large blocks of memory every draw call isn’t going to be fun. The vulkan code was also a bit fragile and broken under wayland, needing a hack to make it synchronize properly.
+
+So this PR does 3 things, it reworks video\_out to be more accurate based on my reverse engineering, fully reworks the vulkan backend side of things to have better abstractions that will make the 3d engine implementation easier and fully reworks the texture caching system to be based on fault tracking.
+
+The first part is mostly self explanatory, the implementation has been split into a separate class for easier state management and some additional error codes have been added, but the result isn’t all the different from before. Presentation now occurs in the game thread instead of the window thread, which makes things a bit easier. In the future there should be a separate gpu thread to handle all the extra work but that isn’t needed here.
+
+The new vulkan backend is based on the Citra one and uses vulkan-hpp instead of raw vulkan as it’s a little bit less verbose and solves the previous license problem, as the C headers are licensed under Apache which is incompatible with GPLv2. Vulkan-Hpp on the other hand is licensed with MIT as well which is ok. Like Citra, initialization is handled by the Instance class where all extensions are also loaded, the Scheduler has been ported as well as it will prove useful for parallel shader building in the future and makes validation layer performance a bit less miserable.
+
+The main change here however is the texture cache. When a new image is stored in the cache, the region it owns is marked as protected using an mprotect call. This means that any reads or writes from the guest will go through the texture cache’s exception handler, which will allow it to decide on the appropriate action (either invalidation or flush). When the image is requested again, it is validated with an upload and reprotected. In general that’s a relatively clean way to handle readbacks or related accesses emulating a UMA system entails. In the future this can be tuned to be better suited for the PS4s memory model, but it’s a good base.
+
+Second we got [video\_core: Add basic command list processing](https://github.com/shadps4-emu/shadPS4/pull/117) from [The Turtle](https://github.com/raphaelthegreat)
+
+Implements a few PM4 commands and gnm submit call. This means that guest application will no longer be stuck waiting for a command buffer label. Right now commands don’t do anything, actual functionality will be added in future PRs. Gnmdriver functions that write private packets have been implemented as close to real module disassembly as possible
+
+what all the above means in general? . Shadps4 is getting ready to progress some real graphics from gpu .( currently we have only framebuffer demos working). So what’s the next steps?
+
+Probably the next to follow will be
+
+Shader compiler
+
+Rendering code
+
+Stay tuned for more updates soon!

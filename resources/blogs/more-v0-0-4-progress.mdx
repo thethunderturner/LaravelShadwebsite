@@ -1,0 +1,54 @@
+---
+category: Developing
+description: "More interesting pr’s came to our git these days Firstly we got Rewrite thread local storage implementation from The Turtle…"
+pubDate: 2024-05-03T12:24:38.000Z
+title: "more v0.0.4 progress"
+---
+
+More interesting pr’s came to our git these days
+
+Firstly we got [Rewrite thread local storage implementation](https://github.com/shadps4-emu/shadPS4/pull/118) from [The Turtle](https://github.com/raphaelthegreat)
+
+t’s not uncommon for ps4 guest applications to launch and use many threads, which also necessitates handling thread local storage properly. In x86 thread local accesses are performed by loading the pointer in the fs segment register. This is a problem as Windows doesn’t allow you to change the value of this register to what the guest expects. Not quite true, see first reply
+
+On master this is handled with a simple exception handler that will patch the value of the destination register with a thread\_local buffer. This works fine but will be a problem later on. Obviously the performance impact is pretty large for any access. In addition, the new texture cache that does fault tracking also needs a custom exception handler, so they end up conflicting. Also, guest apps can use negative offsets when accessing the buffer, so the current implementation would trigger UB in these cases.
+
+This PR attempts to fix all of the above, by using assembly trampolines instead of the exception handler. For storing the TLS image pointer, a new TLS slot is allocated from the parent process and the logic from wine’s TlsGetValue is used to retrieve the value. This means we also don’t have to rely on undefined/unused spaces in TEB structure to store our data. Each mov instruction from FS segment is patched with a jump to a trampoline that loads the actual pointer.
+
+While at it, also fixed a problem with fault tracking that caused crashing in pngdec demo. The tracking was being performed in the texture cache page size, when it should be on 4KB boundary like the host/guest. Also bumped the cache page size to vastly reduce the amount of page table accesses.
+
+Secondly comes a pr [gnmdriver: basic functionality extension](https://github.com/shadps4-emu/shadPS4/pull/120) from [psucien](https://github.com/psucien)
+
+This adds implementation for the next commonly used driver functions:
+
+*   `sceGnmComputeWaitOnAddress`
+*   `sceGnmDispatchDirect`
+*   `sceGnmDispatchIndirect`
+*   `sceGnmDrawIndexOffset`
+*   `sceGnmInsertPopMarker`
+*   `sceGnmInsertPushMarker`
+*   `sceGnmUpdatePsShader350`
+*   `sceGnmUpdateVsShader`
+
+Functions, related to HW state initialization and indirect draw calls, are subject to the next updates of this PR.  
+Submission related functionality will be re-worked in a separate PR as required changes in the GPU frontend.
+
+Another pr for [Psf info + stack allocation](https://github.com/shadps4-emu/shadPS4/pull/122) from [shadow](https://github.com/georgemoralis)
+
+Fix stack allocation : Currently we have a lot of crashes with the default stack allocation , the /stack flag increase the stack and commit area so let’s hope it will solve all relative crash issues
+
+Print param.sfo at startup : We can print game id , title , fw version required , app version at the startup of the log file. We also will need the following info for savedata and sceAppContent module at future ( savedata pr is on it’s way)
+
+Even on more pr for [Sonicmania work](https://github.com/shadps4-emu/shadPS4/pull/123) from [shadow](https://github.com/georgemoralis) which address the following issues
+
+Flexible memory : some dummy mostly implementation of flexible memory mapping but allows games to go further
+
+CreateThread : it appears some time threads are nameless
+
+sceUserServiceGetEvent : implemented a fake login event , but should be enought atm
+
+And latest one more pr for [dummy np\* modules and screenshot module](https://github.com/shadps4-emu/shadPS4/pull/124) from [shadow](https://github.com/georgemoralis)
+
+which add stubs for np\* functions
+
+Stay tuned for more updates soon 🙂
