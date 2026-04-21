@@ -1,4 +1,4 @@
-<x-layout title="Compatibility">
+<x-layout title="Compatibility" description="Find out if your favorite games are compatible with shadPS4 emulator">
     @push('head')
         @vite('resources/css/filament/shadpanel/theme.css')
         @filamentStyles
@@ -9,17 +9,17 @@
     @endpush
 
     <div class="flex w-full flex-col gap-6 lg:flex-row lg:justify-evenly">
-        <x-compatibility.stats-card
+        <x-cards.stats-card
             name="Windows"
             icon="images/os/Windows.png"
             :stats="$stats['Windows']"
         />
-        <x-compatibility.stats-card
+        <x-cards.stats-card
             name="Linux"
             icon="images/os/Linux.png"
             :stats="$stats['Linux']"
         />
-        <x-compatibility.stats-card
+        <x-cards.stats-card
             name="macOS"
             icon="images/os/MacOS.png"
             :stats="$stats['MacOS']"

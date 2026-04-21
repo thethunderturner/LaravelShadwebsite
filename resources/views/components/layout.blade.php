@@ -1,4 +1,4 @@
-@props(['title' => null])
+@props(['title' => null, 'description' => null])
 
 <!DOCTYPE html>
 <html lang="en" class="dark">
@@ -15,6 +15,9 @@
     <main class="mx-auto w-full max-w-[70%] flex-1">
         <div class="py-8 text-text text-3xl font-bold">
             {{$title}}
+            <div class="pt-1 text-base font-normal">
+                {{$description}}
+            </div>
         </div>
         {{ $slot }}
     </main>

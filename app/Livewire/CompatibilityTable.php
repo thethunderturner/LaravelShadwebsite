@@ -51,13 +51,16 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
                         default => 'gray',
                     })
                     ->sortable(),
-                TextColumn::make('os')
+                ViewColumn::make('os')
                     ->label('OS')
+                    ->view('filament.tables.columns.os')
                     ->sortable(),
                 TextColumn::make('version')
+                    ->badge()
                     ->sortable(),
-                TextColumn::make('region')
-                    ->label('Region'),
+                ViewColumn::make('region')
+                    ->label('Region')
+                    ->view('filament.tables.columns.region'),
                 TextColumn::make('updatedDate')
                     ->label('Updated')
                     ->date('d/m/Y')

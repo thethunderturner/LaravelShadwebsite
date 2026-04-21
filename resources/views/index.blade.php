@@ -32,7 +32,7 @@
             </p>
             <div class="mt-6 grid gap-6 md:grid-cols-3">
                 @foreach ($latestPosts as $i => $post)
-                    <x-post-card :post="$post" />
+                    <x-cards.post-card :post="$post" />
                 @endforeach
             </div>
         </div>
@@ -46,9 +46,9 @@
             </p>
             <div class="pt-2 text-xl font-bold sm:text-2xl">Trending Right Now:</div>
             <div class="mt-6 grid gap-6 md:grid-cols-3">
-                <x-shadpsn-card name="Bloodborne" cusa="CUSA00900" players="142" />
-                <x-shadpsn-card name="Dark Souls Remastered" cusa="CUSA09694" players="87" />
-                <x-shadpsn-card name="Devil May Cry 4 SE" cusa="CUSA00912" players="53" />
+                <x-cards.shadpsn-card name="Bloodborne" cusa="CUSA00900" players="142" />
+                <x-cards.shadpsn-card name="Dark Souls Remastered" cusa="CUSA09694" players="87" />
+                <x-cards.shadpsn-card name="Devil May Cry 4 SE" cusa="CUSA00912" players="53" />
             </div>
         </div>
 
@@ -58,7 +58,7 @@
             <p class="text-lg text-zinc-800 dark:text-zinc-100">Find out more about all things regarding shadPS4.</p>
 
             <div class="grid grid-cols-1 gap-6 pt-4 md:grid-cols-2 lg:gap-8">
-                <x-external-card
+                <x-cards.external-card
                     href="https://github.com/shadps4-emu/shadPS4"
                     aria="GitHub repository"
                     icon="fa-brands fa-github"
@@ -70,7 +70,7 @@
                     button="Explore repo"
                 />
 
-                <x-external-card
+                <x-cards.external-card
                     href="https://discord.gg/bFJxfftGW6"
                     aria="Discord server"
                     icon="fa-brands fa-discord"
@@ -82,7 +82,7 @@
                     button="Join server"
                 />
 
-                <x-external-card
+                <x-cards.external-card
                     href="https://www.youtube.com/@gmoralistube"
                     aria="Youtube channel"
                     icon="fa-brands fa-youtube"
@@ -94,7 +94,7 @@
                     button="Watch"
                 />
 
-                <x-external-card
+                <x-cards.external-card
                     href="https://ko-fi.com/shadps4"
                     aria="Support on Ko-fi"
                     icon="fa-solid fa-mug-saucer"
