@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class CompatibilityController extends Controller
 {
-    private const TAGS = ['Playable', 'Ingame', 'Menus', 'Boots', 'Nothing'];
+    private const array TAGS = ['Playable', 'Ingame', 'Menus', 'Boots', 'Nothing'];
 
-    private const OS_LIST = ['Windows', 'Linux', 'MacOS'];
+    private const array OS_LIST = ['Windows', 'Linux', 'MacOS'];
 
     public function __invoke(): View
     {
