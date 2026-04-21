@@ -15,6 +15,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
 class CompatibilityTable extends Component implements HasActions, HasSchemas, HasTable
@@ -28,6 +29,9 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
         return $table
             ->query(CompatibilityList::query()->with('db'))
             ->defaultSort('updatedDate', 'desc')
+            ->recordUrl(fn (Model $record): string => "https://github.com/shadps4-compatibility/shadps4-game-compatibility/issues/{$record->id}")
+            ->striped()
+            ->openRecordUrlInNewTab()
             ->columns([
                 ViewColumn::make('cusa_image')
                     ->label('Image')
@@ -45,7 +49,7 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
                     ->color(fn (string $state): string => match ($state) {
                         'Playable' => 'success',
                         'Ingame' => 'info',
-                        'Menus' => 'warning',
+                        'Menus' => 'purple',
                         'Boots' => 'warning',
                         'Nothing' => 'danger',
                         default => 'gray',
@@ -57,6 +61,7 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
                     ->sortable(),
                 TextColumn::make('version')
                     ->badge()
+                    ->color('sky')
                     ->sortable(),
                 ViewColumn::make('region')
                     ->label('Region')
@@ -68,6 +73,7 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
             ])
             ->filters([
                 SelectFilter::make('status')
+                    ->native(false)
                     ->options([
                         'Playable' => 'Playable',
                         'Ingame' => 'Ingame',
@@ -77,12 +83,14 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
                     ]),
                 SelectFilter::make('os')
                     ->label('OS')
+                    ->native(false)
                     ->options([
                         'Windows' => 'Windows',
                         'Linux' => 'Linux',
                         'MacOS' => 'MacOS',
                     ]),
                 SelectFilter::make('version')
+                    ->native(false)
                     ->options(fn () => CompatibilityList::query()
                         ->whereNotNull('version')
                         ->where('version', '!=', '')
@@ -92,6 +100,7 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
                         ->all()
                     ),
                 SelectFilter::make('region')
+                    ->native(false)
                     ->options([
                         'USA' => 'USA',
                         'Europe' => 'Europe',
