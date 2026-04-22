@@ -1,7 +1,7 @@
 @props(['post'])
 
 <article class="group mx-auto flex h-full w-full max-w-xl min-w-0 flex-col overflow-hidden">
-    <a class="w-full overflow-hidden rounded-lg" href="/blog/{{ $post->id }}">
+    <a class="w-full overflow-hidden rounded-lg" href="{{ route('blog.show', $post) }}">
         <img
             src="{{ $post->image ? asset('images/'.$post->image) : asset('images/default-hero-image.jpg') }}"
             alt="{{ $post->title }}"
@@ -33,7 +33,7 @@
         </div>
 
         <h3 class="text-xl leading-tight font-bold text-zinc-900 dark:text-zinc-100">
-            <a href="/blog/{{ $post->id }}" class="line-clamp-2 truncate wrap-break-word" title="{{ $post->title }}">
+            <a href="{{ route('blog.show', $post) }}" class="line-clamp-2 truncate wrap-break-word" title="{{ $post->title }}">
                 {{ $post->title }}
             </a>
         </h3>
