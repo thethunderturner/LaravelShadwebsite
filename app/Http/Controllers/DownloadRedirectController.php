@@ -11,11 +11,21 @@ class DownloadRedirectController extends Controller
 {
     public function __invoke(Request $request, Download $download): RedirectResponse
     {
-        $download->increment('count');
+        $ip = $request->ip();
+
+        $recentlyCounted = DownloadLogs::query()
+            ->where('file_name', $download->file_name)
+            ->where('ip', $ip)
+            ->where('timestamp', '>=', now()->subDay())
+            ->exists();
+
+        if (! $recentlyCounted) {
+            $download->increment('count');
+        }
 
         DownloadLogs::create([
             'file_name' => $download->file_name,
-            'ip' => $request->ip(),
+            'ip' => $ip,
             'timestamp' => now(),
         ]);
 
