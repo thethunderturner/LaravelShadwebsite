@@ -2,7 +2,9 @@
     'name',
     'icon',
     'description',
-    'download' => null,
+    'href' => null,
+    'count' => null,
+    'external' => false,
     'buttonColor' => 'blue',
 ])
 
@@ -12,7 +14,7 @@
         'green' => 'bg-green-600 hover:bg-green-500',
         'red' => 'bg-red-600 hover:bg-red-500',
     ][$buttonColor] ?? 'bg-blue-600 hover:bg-blue-500';
-    $available = $download !== null;
+    $available = $href !== null;
 @endphp
 
 <div class="bg-root border-border flex flex-col rounded-lg border p-4">
@@ -25,8 +27,8 @@
 
     <div class="mt-auto flex items-center justify-between pt-6">
         <span class="text-text/60 text-xs tabular-nums">
-            @if ($available)
-                {{ number_format((int) $download->count) }} downloads
+            @if ($count !== null)
+                {{ number_format((int) $count) }} downloads
             @else
                 Unavailable
             @endif
@@ -34,7 +36,8 @@
 
         @if ($available)
             <a
-                href="{{ route('downloads.go', $download) }}"
+                href="{{ $href }}"
+                @if ($external) target="_blank" rel="noopener noreferrer" @endif
                 class="{{ $colorClasses }} rounded-md px-4 py-2 text-sm font-semibold text-white transition"
             >
                 Download
