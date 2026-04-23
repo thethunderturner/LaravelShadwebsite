@@ -24,8 +24,10 @@ class ShadpanelPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->default()
             ->id('shadpanel')
             ->path('shadpanel')
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])
