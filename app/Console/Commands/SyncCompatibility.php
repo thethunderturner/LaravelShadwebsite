@@ -189,11 +189,15 @@ class SyncCompatibility extends Command
             return;
         }
 
-        $rows = CompatibilityList::query()->orderByDesc('updated_at')->get(['code']);
-        foreach ($rows as $row) {
-            $code = $row->code;
+        $codes = CompatibilityList::query()->orderByDesc('updated_at')->pluck('code')->unique();
+        $metaExists = CompatibilityDb::query()->pluck('codedb')->flip();
+
+        foreach ($codes as $code) {
             $path = "{$dir}/{$code}.png";
-            if (file_exists($path)) {
+            $needsImage = ! file_exists($path);
+            $needsMeta = ! $metaExists->has($code);
+
+            if (! $needsImage && ! $needsMeta) {
                 continue;
             }
 
@@ -203,32 +207,35 @@ class SyncCompatibility extends Command
                     ->get("https://tmdb.np.dl.playstation.net/tmdb2/{$code}_00_{$hash}/{$code}_00.json")
                     ->json();
 
-                if (empty($meta['icons'][0]['icon'])) {
-                    $this->warn("No icon for {$code}");
+                if (! is_array($meta) || empty($meta['contentId'] ?? null)) {
+                    $this->warn("No TMDB data for {$code}");
 
                     continue;
                 }
 
-                usleep(random_int(200_000, 500_000));
-
-                $iconUrl = str_replace('http://', 'https://', $meta['icons'][0]['icon']);
-                $imageData = Http::withUserAgent(self::TMDB_USER_AGENT)->get($iconUrl)->body();
-
-                if ($this->saveThumbnail($imageData, $path)) {
-                    $this->info("Image saved: {$code}");
+                if ($needsMeta) {
+                    CompatibilityDb::query()->updateOrCreate(
+                        ['codedb' => $code],
+                        [
+                            'titledb' => $meta['names'][0]['name'] ?? '',
+                            'parentalLevel' => $meta['parentalLevel'] ?? 0,
+                            'contentId' => $meta['contentId'] ?? '',
+                            'category' => $meta['category'] ?? '',
+                            'psVr' => (bool) ($meta['psVr'] ?? false),
+                            'neoEnable' => (bool) ($meta['neoEnable'] ?? false),
+                        ],
+                    );
+                    $this->info("Metadata saved: {$code}");
                 }
 
-                CompatibilityDb::query()->updateOrCreate(
-                    ['codedb' => $code],
-                    [
-                        'titledb' => $meta['names'][0]['name'] ?? '',
-                        'parentalLevel' => $meta['parentalLevel'] ?? 0,
-                        'contentId' => $meta['contentId'] ?? '',
-                        'category' => $meta['category'] ?? '',
-                        'psVr' => (bool) ($meta['psVr'] ?? false),
-                        'neoEnable' => (bool) ($meta['neoEnable'] ?? false),
-                    ],
-                );
+                if ($needsImage && ! empty($meta['icons'][0]['icon'])) {
+                    usleep(random_int(200_000, 500_000));
+                    $iconUrl = str_replace('http://', 'https://', $meta['icons'][0]['icon']);
+                    $imageData = Http::withUserAgent(self::TMDB_USER_AGENT)->get($iconUrl)->body();
+                    if ($this->saveThumbnail($imageData, $path)) {
+                        $this->info("Image saved: {$code}");
+                    }
+                }
             } catch (Throwable $e) {
                 $this->error("Failed {$code}: ".$e->getMessage());
             }
