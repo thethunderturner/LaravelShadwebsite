@@ -1,1 +1,1 @@
-<x-cards.post-card :post="$getRecord()" />
+<x-cards.post-card :post="$getRecord()" :linkable="false" />

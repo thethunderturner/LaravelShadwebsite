@@ -29,6 +29,7 @@ class GridPostsTable extends Component implements HasActions, HasSchemas, HasTab
         return $table
             ->query(Post::query())
             ->defaultSort('pubDate', 'desc')
+            ->recordUrl(fn (Post $record): string => route('blog.show', $record))
             ->columns([
                 Stack::make([
                     TextColumn::make('title')
