@@ -1,6 +1,7 @@
 @php
-    use Illuminate\Support\Str;
+    use App\Support\Markdown;
     $heroImage = $post->image ? asset('images/'.$post->image) : null;
+    ['html' => $contentHtml, 'toc' => $toc] = Markdown::renderWithToc($post->content);
 @endphp
 
 <x-layout :title="$post->title">
@@ -47,6 +48,25 @@
                         </div>
                     </div>
                 @endif
+
+                @if (count($toc) >= 2)
+                    <nav>
+                        <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">Contents</h3>
+                        <ol class="mt-2 flex flex-col gap-1 text-sm">
+                            @foreach ($toc as $item)
+                                <li style="padding-left: {{ ($item['level'] - 2) * 12 }}px">
+                                    <a
+                                        href="#{{ $item['id'] }}"
+                                        class="text-text/70 hover:text-text block truncate transition"
+                                        title="{{ $item['text'] }}"
+                                    >
+                                        {{ $item['text'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ol>
+                    </nav>
+                @endif
             </aside>
 
             {{-- Main content --}}
@@ -67,9 +87,10 @@
 
                 <div class="text-text/90 mt-8
                     [&_p]:mt-4 [&_p]:leading-relaxed
-                    [&_h1]:mt-8 [&_h1]:text-3xl [&_h1]:font-bold
-                    [&_h2]:mt-6 [&_h2]:text-2xl [&_h2]:font-bold
-                    [&_h3]:mt-5 [&_h3]:text-xl [&_h3]:font-bold
+                    [&_h1]:mt-8 [&_h1]:scroll-mt-24 [&_h1]:text-3xl [&_h1]:font-bold
+                    [&_h2]:mt-6 [&_h2]:scroll-mt-24 [&_h2]:text-2xl [&_h2]:font-bold
+                    [&_h3]:mt-5 [&_h3]:scroll-mt-24 [&_h3]:text-xl [&_h3]:font-bold
+                    [&_h4]:mt-4 [&_h4]:scroll-mt-24 [&_h4]:text-lg [&_h4]:font-bold
                     [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-6
                     [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-6
                     [&_li]:mt-1
@@ -78,7 +99,7 @@
                     [&_pre]:mt-4 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-card [&_pre]:p-4
                     [&_blockquote]:border-border mt-4 [&_blockquote]:mt-4 [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic
                     [&_img]:mt-4 [&_img]:rounded-lg">
-                    {!! Str::markdown($post->content) !!}
+                    {!! $contentHtml !!}
                 </div>
             </div>
         </div>
