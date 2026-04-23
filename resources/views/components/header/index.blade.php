@@ -3,7 +3,7 @@
         <div class="hidden flex-row gap-x-3 lg:flex">
             {{-- Simple pages --}}
             @foreach (config('navigation.pages') as $item)
-                <a href="{{ $item['href'] }}" class="text-white text-lg/6 font-semibold">
+                <a href="{{ $item['href'] }}" class="text-text text-lg/6 font-semibold">
                     {{ $item['name'] }}
                 </a>
             @endforeach
@@ -24,10 +24,10 @@
                 @endforeach
             </div>
             <div class="h-6 w-px bg-gray-700 dark:bg-gray-600"></div>
-            {{-- TODO: <x-header.theme-icon /> --}}
+            <x-header.theme-icon />
         </div>
 
         {{-- Mobile trigger --}}
-        {{-- TODO: <x-header.mobile-sidebar /> --}}
+        <x-header.mobile-sidebar />
     </nav>
 </header>

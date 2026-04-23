@@ -11,7 +11,7 @@
     $total = $stats[0]['total'] ?? 0;
 @endphp
 
-<div class="bg-card border-border flex max-h-full w-full flex-col rounded-lg border p-4 lg:w-110">
+<div class="bg-card border-border flex h-full w-full min-w-0 flex-col rounded-lg border p-4">
     <div class="border-border flex flex-row gap-x-4 border-b pb-4">
         <img src="{{ asset($icon) }}" alt="{{ $name }} logo" class="size-12">
         <div class="flex flex-col">
