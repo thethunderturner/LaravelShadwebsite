@@ -4,3 +4,22 @@
 @source '../../../../app/Livewire/**/*';
 @source '../../../../resources/views/filament/**/*';
 @source '../../../../resources/views/livewire/**/*';
+@source '../../../../resources/views/components/**/*';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-header: #ffffff;
+    --color-root: #f3f4f6;
+    --color-border: #d1d5db;
+    --color-card: #ffffff;
+    --color-text: #18181b;
+}
+
+:where(.dark, .dark *) {
+    --color-header: #030712;
+    --color-root: oklch(0.19 0.03 269.8 / 1);
+    --color-border: #1e293b;
+    --color-card: #020617;
+    --color-text: #ffffff;
+}

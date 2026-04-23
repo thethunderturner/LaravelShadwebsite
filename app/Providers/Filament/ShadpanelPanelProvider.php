@@ -29,6 +29,7 @@ class ShadpanelPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->viteTheme('resources/css/filament/shadpanel/theme.css')
             ->discoverResources(in: app_path('Filament/Shadpanel/Resources'), for: 'App\Filament\Shadpanel\Resources')
             ->discoverPages(in: app_path('Filament/Shadpanel/Pages'), for: 'App\Filament\Shadpanel\Pages')
             ->pages([
