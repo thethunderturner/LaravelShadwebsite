@@ -12,3 +12,4 @@ Route::get('/compatibility', CompatibilityController::class)->name('compatibilit
 Route::get('/downloads', DownloadController::class)->name('downloads');
 Route::get('/downloads/{download}/go', DownloadRedirectController::class)->name('downloads.go');
 Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');

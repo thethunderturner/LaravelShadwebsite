@@ -7,6 +7,11 @@ use Illuminate\Contracts\View\View;
 
 class BlogController extends Controller
 {
+    public function index()
+    {
+        return view('blog.index');
+    }
+
     public function show(Post $post): View
     {
         return view('blog.show', ['post' => $post]);
