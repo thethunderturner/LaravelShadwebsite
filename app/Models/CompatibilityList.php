@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['code', 'title', 'version', 'type', 'status', 'os', 'createdDate', 'updatedDate'])]
+#[Fillable(['id', 'code', 'title', 'version', 'type', 'status', 'os'])]
 #[Table('compatibilitylist')]
 class CompatibilityList extends Model
 {

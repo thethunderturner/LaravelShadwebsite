@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('status');
             $table->string('os');
-            $table->date('createdDate'); // TODO: Change to use timestamps(). Also required to change the column in the database
-            $table->date('updatedDate');
+            $table->timestamps();
         });
     }
 

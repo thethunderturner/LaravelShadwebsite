@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('category');
             $table->boolean('psVr');
             $table->boolean('neoEnable');
+            $table->timestamps();
         });
     }
 

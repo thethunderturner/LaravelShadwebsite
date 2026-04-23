@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('error_list', function (Blueprint $table) {
+        Schema::create('errlist', function (Blueprint $table) {
             $table->id();
             $table->string('reason');
+            $table->timestamps();
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('error_list');
+        Schema::dropIfExists('errlist');
     }
 };

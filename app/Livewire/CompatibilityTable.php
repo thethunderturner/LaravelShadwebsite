@@ -24,11 +24,17 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
     use InteractsWithSchemas;
     use InteractsWithTable;
 
+    // TODO: If search doesnt start with CUSA, then search by title, if search starts by CUSA search by CUSA
     public function table(Table $table): Table
     {
         return $table
             ->query(CompatibilityList::query()->with('db'))
-            ->defaultSort('updatedDate', 'desc')
+            ->defaultSort('updated_at', 'desc')
+//            ->recordUrl(function (Model $record) {
+//                if ($record->id == 2442) {
+//                    dd($record);
+//                }
+//            })
             ->recordUrl(fn (Model $record): string => "https://github.com/shadps4-compatibility/shadps4-game-compatibility/issues/{$record->id}")
             ->striped()
             ->openRecordUrlInNewTab()
@@ -66,7 +72,7 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
                 ViewColumn::make('region')
                     ->label('Region')
                     ->view('filament.tables.columns.region'),
-                TextColumn::make('updatedDate')
+                TextColumn::make('updated_at')
                     ->label('Updated')
                     ->date('d/m/Y')
                     ->sortable(),

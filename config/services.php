@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'github' => [
+        'token' => env('GITHUB_TOKEN'),
+        'compatibility_repo' => env('GITHUB_COMPATIBILITY_REPO', 'shadps4-compatibility/shadps4-game-compatibility'),
+    ],
+
+    'tmdb' => [
+        'hmac_key' => env('TMDB_HMAC_KEY'),
+    ],
+
 ];
