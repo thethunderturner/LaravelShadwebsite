@@ -24,20 +24,17 @@ class ShadpanelPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
             ->id('shadpanel')
             ->path('shadpanel')
-            ->viteTheme('resources/css/filament/shadpanel/theme.css')
-            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->discoverResources(in: app_path('Filament/Shadpanel/Resources'), for: 'App\Filament\Shadpanel\Resources')
+            ->discoverPages(in: app_path('Filament/Shadpanel/Pages'), for: 'App\Filament\Shadpanel\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Shadpanel/Widgets'), for: 'App\Filament\Shadpanel\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
