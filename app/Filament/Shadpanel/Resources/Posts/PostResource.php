@@ -4,6 +4,7 @@ namespace App\Filament\Shadpanel\Resources\Posts;
 
 use App\Filament\Shadpanel\Resources\Posts\Pages\CreatePost;
 use App\Filament\Shadpanel\Resources\Posts\Pages\EditPost;
+use App\Filament\Shadpanel\Resources\Posts\Pages\GridPosts;
 use App\Filament\Shadpanel\Resources\Posts\Pages\ListPosts;
 use App\Filament\Shadpanel\Resources\Posts\Pages\ViewPost;
 use App\Filament\Shadpanel\Resources\Posts\Schemas\PostForm;
@@ -49,6 +50,7 @@ class PostResource extends Resource
         return [
             'index' => ListPosts::route('/'),
             'create' => CreatePost::route('/create'),
+            'grid' => GridPosts::route('/grid'),
             'view' => ViewPost::route('/{record}'),
             'edit' => EditPost::route('/{record}/edit'),
         ];
