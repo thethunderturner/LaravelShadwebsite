@@ -24,17 +24,11 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
     use InteractsWithSchemas;
     use InteractsWithTable;
 
-    // TODO: If search doesnt start with CUSA, then search by title, if search starts by CUSA search by CUSA
     public function table(Table $table): Table
     {
         return $table
             ->query(CompatibilityList::query()->with('db'))
             ->defaultSort('updated_at', 'desc')
-//            ->recordUrl(function (Model $record) {
-//                if ($record->id == 2442) {
-//                    dd($record);
-//                }
-//            })
             ->recordUrl(fn (Model $record): string => "https://github.com/shadps4-compatibility/shadps4-game-compatibility/issues/{$record->id}")
             ->striped()
             ->openRecordUrlInNewTab()
@@ -43,12 +37,24 @@ class CompatibilityTable extends Component implements HasActions, HasSchemas, Ha
                     ->label('Image')
                     ->view('filament.tables.columns.cusa-image'),
                 TextColumn::make('title')
-                    ->searchable()
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        if (str_starts_with(strtoupper($search), 'CUSA')) {
+                            return $query;
+                        }
+
+                        return $query->where('title', 'like', "%{$search}%");
+                    })
                     ->sortable()
                     ->formatStateUsing(fn (string $state): string => html_entity_decode($state)),
                 TextColumn::make('code')
                     ->label('CUSA')
-                    ->searchable()
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        if (! str_starts_with(strtoupper($search), 'CUSA')) {
+                            return $query;
+                        }
+
+                        return $query->where('code', 'like', "%{$search}%");
+                    })
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
