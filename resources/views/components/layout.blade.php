@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ? $title.' | '.config('site.title') : config('site.title') }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/filament/shadpanel/theme.css'])
+    @filamentStyles
     @fluxAppearance
-    @stack('head')
 </head>
 <body class="bg-root flex min-h-screen flex-col">
     <x-header />
@@ -22,8 +22,8 @@
         {{ $slot }}
     </main>
     <x-footer />
+    @filamentScripts
     @livewireScripts
     @fluxScripts
-    @stack('scripts')
 </body>
 </html>

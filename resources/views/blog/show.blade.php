@@ -11,7 +11,7 @@
                 <img
                     src="{{ $heroImage }}"
                     alt="{{ $post->title }}"
-                    class="aspect-[21/9] w-full object-cover"
+                    class="aspect-21/9 w-full object-cover"
                     loading="eager"
                 >
             </div>
@@ -97,7 +97,7 @@
                     [&_a]:text-blue-400 [&_a]:underline
                     [&_code]:bg-card [&_code]:rounded [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm
                     [&_pre]:mt-4 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-card [&_pre]:p-4
-                    [&_blockquote]:border-border mt-4 [&_blockquote]:mt-4 [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic
+                    [&_blockquote]:border-border [&_blockquote]:mt-4 [&_blockquote]:border-l-4 [&_blockquote]:pl-4 [&_blockquote]:italic
                     [&_img]:mt-4 [&_img]:rounded-lg">
                     {!! $contentHtml !!}
                 </div>
