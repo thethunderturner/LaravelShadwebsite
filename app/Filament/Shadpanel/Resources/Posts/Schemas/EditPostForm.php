@@ -33,6 +33,7 @@ class EditPostForm
                             ->columnSpanFull(),
                         RichEditor::make('content')
                             ->required()
+                            ->json()
                             ->columnSpanFull(),
                     ]),
                     Section::make([

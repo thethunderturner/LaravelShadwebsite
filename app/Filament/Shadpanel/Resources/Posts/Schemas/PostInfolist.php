@@ -2,6 +2,7 @@
 
 namespace App\Filament\Shadpanel\Resources\Posts\Schemas;
 
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Flex;
@@ -29,6 +30,7 @@ class PostInfolist
                             ->color('primary'),
                         Section::make([
                             TextEntry::make('content')
+                                ->state(fn ($record) => RichContentRenderer::make($record->content)->toHtml())
                                 ->markdown()
                                 ->columnSpanFull(),
                         ]),
