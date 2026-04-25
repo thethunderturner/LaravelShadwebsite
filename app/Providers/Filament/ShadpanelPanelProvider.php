@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Awcodes\Curator\CuratorPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -55,6 +56,13 @@ class ShadpanelPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                CuratorPlugin::make()
+                    ->label('Media')
+                    ->pluralLabel('Media')
+                    ->navigationIcon('heroicon-o-photo')
+                    ->navigationGroup('Content'),
             ]);
     }
 }

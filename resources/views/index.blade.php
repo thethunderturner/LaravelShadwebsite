@@ -1,4 +1,9 @@
 <x-layout title="Home">
+    @push('head')
+        @vite('resources/css/filament/shadpanel/theme.css')
+        @filamentStyles
+    @endpush
+
     {{-- Hero --}}
     <div class="relative flex min-h-[45vh] w-full flex-col items-center justify-center overflow-hidden rounded-2xl sm:min-h-[45vh]">
         <img

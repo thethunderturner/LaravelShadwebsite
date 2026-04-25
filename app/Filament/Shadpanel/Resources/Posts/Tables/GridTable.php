@@ -1,35 +1,26 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Filament\Shadpanel\Resources\Posts\Tables;
 
+use App\Enum\PostCategory;
+use App\Enum\PostTags;
+use App\Filament\Shadpanel\Resources\Posts\PostResource;
 use App\Models\Post;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\Contracts\HasActions;
-use Filament\Schemas\Concerns\InteractsWithSchemas;
-use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\Layout\View;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Concerns\InteractsWithTable;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\Component;
 
-class GridPostsTable extends Component implements HasActions, HasSchemas, HasTable
+class GridTable
 {
-    use InteractsWithActions;
-    use InteractsWithSchemas;
-    use InteractsWithTable;
-
-    public function table(Table $table): Table
+    public static function configure(Table $table): Table
     {
         return $table
             ->query(Post::query())
             ->defaultSort('pubDate', 'desc')
-            ->recordUrl(fn (Post $record): string => route('blog.show', $record))
+            ->recordUrl(fn (Post $record): string => PostResource::getUrl('view', ['record' => $record]))
             ->columns([
                 Stack::make([
                     TextColumn::make('title')
@@ -45,27 +36,11 @@ class GridPostsTable extends Component implements HasActions, HasSchemas, HasTab
             ->filters([
                 SelectFilter::make('category')
                     ->native(false)
-                    ->options(fn (): array => Post::query()
-                        ->whereNotNull('category')
-                        ->where('category', '!=', '')
-                        ->distinct()
-                        ->orderBy('category')
-                        ->pluck('category', 'category')
-                        ->all()
-                    ),
+                    ->options(PostCategory::class),
                 SelectFilter::make('tags')
                     ->multiple()
                     ->native(false)
-                    ->options(fn (): array => Post::query()
-                        ->whereNotNull('tags')
-                        ->pluck('tags')
-                        ->flatten()
-                        ->filter()
-                        ->unique()
-                        ->sort()
-                        ->mapWithKeys(fn (string $tag): array => [$tag => $tag])
-                        ->all()
-                    )
+                    ->options(PostTags::class)
                     ->query(function (Builder $query, array $data): Builder {
                         $values = $data['values'] ?? [];
 
@@ -82,10 +57,5 @@ class GridPostsTable extends Component implements HasActions, HasSchemas, HasTab
             ])
             ->paginated([6, 12, 24])
             ->defaultPaginationPageOption(6);
-    }
-
-    public function render(): ViewContract
-    {
-        return view('livewire.grid-posts-table');
     }
 }

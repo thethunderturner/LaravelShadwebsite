@@ -29,16 +29,18 @@
 
             @if ($post->category)
                 <span class="text-zinc-600">|</span>
-                <span class="font-bold whitespace-nowrap text-blue-600 dark:text-blue-500">{{ $post->category }}</span>
+                <x-filament::badge color="info">
+                    {{ $post->category }}
+                </x-filament::badge>
             @endif
 
             @if (! empty($post->tags))
                 <span class="text-zinc-600">|</span>
                 <div class="no-scrollbar flex flex-1 items-center gap-x-1 overflow-x-auto py-0.5">
                     @foreach ($post->tags as $tag)
-                        <span class="border-border bg-card text-text shrink-0 rounded border px-1.5 py-0.5 font-medium whitespace-nowrap">
+                        <x-filament::badge color="gray">
                             {{ $tag }}
-                        </span>
+                        </x-filament::badge>
                     @endforeach
                 </div>
             @endif

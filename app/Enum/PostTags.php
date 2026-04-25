@@ -14,6 +14,12 @@ enum PostTags: string implements HasLabel
 
     public function getLabel(): ?string
     {
-        return $this->name;
+        return match ($this) {
+            self::GameFixes => 'Game Fixes',
+            self::Speed => 'Speed Increase',
+            self::Features => 'Features',
+            self::GameProgress => 'Game Progress',
+            self::Other => 'Other Features',
+        };
     }
 }

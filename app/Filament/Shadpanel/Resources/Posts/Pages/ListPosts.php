@@ -3,8 +3,10 @@
 namespace App\Filament\Shadpanel\Resources\Posts\Pages;
 
 use App\Filament\Shadpanel\Resources\Posts\PostResource;
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Support\Icons\Heroicon;
 
 class ListPosts extends ListRecords
 {
@@ -14,6 +16,11 @@ class ListPosts extends ListRecords
     {
         return [
             CreateAction::make(),
+            Action::make('grid')
+                ->label('Grid View')
+                ->url(fn () => GridPosts::getNavigationUrl())
+                ->icon(Heroicon::OutlinedSquares2x2)
+                ->color('gray')
         ];
     }
 }
