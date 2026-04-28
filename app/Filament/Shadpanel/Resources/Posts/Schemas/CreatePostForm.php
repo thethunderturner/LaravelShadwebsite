@@ -4,6 +4,7 @@ namespace App\Filament\Shadpanel\Resources\Posts\Schemas;
 
 use App\Enum\PostCategory;
 use App\Enum\PostTags;
+use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YoutubeBlock;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
@@ -34,7 +35,9 @@ class CreatePostForm
                             ->columnSpanFull(),
                         RichEditor::make('content')
                             ->required()
-                            ->json()
+                            ->customBlocks([
+                                YoutubeBlock::class,
+                            ])
                             ->columnSpanFull(),
                     ]),
                     Section::make([

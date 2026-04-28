@@ -7,6 +7,7 @@ use Awcodes\Curator\Glide\SymfonyResponseFactory;
 use Filament\Support\Colors\Color;
 use Filament\Support\Facades\FilamentColor;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +16,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->extend(
+            HtmlSanitizerConfig::class,
+            fn (HtmlSanitizerConfig $config): HtmlSanitizerConfig => $config
+                ->allowElement('iframe', ['src', 'width', 'height', 'frameborder', 'allowfullscreen', 'allow', 'title', 'referrerpolicy', 'class'])
+        );
     }
 
     /**

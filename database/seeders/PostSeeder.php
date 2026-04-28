@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Post;
+use App\Support\Markdown;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
@@ -26,15 +27,19 @@ class PostSeeder extends Seeder
                 continue;
             }
 
-            Post::factory()->create([
-                'image' => Str::after($frontmatter['heroImage'] ?? '', '/src/assets/images/'),
-                'category' => $frontmatter['category'] ?? 'News',
-                'description' => Str::limit($frontmatter['description'] ?? '', 250, ''),
-                'pubDate' => isset($frontmatter['pubDate']) ? Carbon::parse($frontmatter['pubDate']) : now(),
-                'tags' => $frontmatter['tags'] ?? [],
-                'title' => Str::limit($frontmatter['title'] ?? $file->getBasename('.mdx'), 250, ''),
-                'content' => $content,
-            ]);
+            $title = Str::limit($frontmatter['title'] ?? $file->getBasename('.mdx'), 250, '');
+
+            Post::updateOrCreate(
+                ['title' => $title],
+                [
+                    'image' => Str::after($frontmatter['heroImage'] ?? '', '/src/assets/images/'),
+                    'category' => $frontmatter['category'] ?? 'News',
+                    'description' => Str::limit($frontmatter['description'] ?? '', 250, ''),
+                    'pubDate' => isset($frontmatter['pubDate']) ? Carbon::parse($frontmatter['pubDate']) : now(),
+                    'tags' => $frontmatter['tags'] ?? [],
+                    'content' => Markdown::mdxToEditorHtml($content),
+                ],
+            );
         }
     }
 

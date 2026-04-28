@@ -18,7 +18,6 @@ class Post extends Model
         return [
             'tags' => 'array',
             'pubDate' => 'datetime',
-            'content' => 'array',
         ];
     }
 }

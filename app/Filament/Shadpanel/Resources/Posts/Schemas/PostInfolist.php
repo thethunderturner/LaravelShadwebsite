@@ -2,6 +2,7 @@
 
 namespace App\Filament\Shadpanel\Resources\Posts\Schemas;
 
+use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YoutubeBlock;
 use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
@@ -30,8 +31,9 @@ class PostInfolist
                             ->color('primary'),
                         Section::make([
                             TextEntry::make('content')
-                                ->state(fn ($record) => RichContentRenderer::make($record->content)->toHtml())
-                                ->markdown()
+                                ->state(fn ($record) => RichContentRenderer::make($record->content)->customBlocks([YoutubeBlock::class])->toHtml())
+                                ->html()
+                                ->prose()
                                 ->columnSpanFull(),
                         ]),
                     ]),

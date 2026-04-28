@@ -7,6 +7,46 @@ use Illuminate\Support\Str;
 class Markdown
 {
     /**
+     * Convert legacy MDX blog content to HTML compatible with Filament's rich editor:
+     * runs markdown, rewrites legacy image paths, and converts <YoutubeEmbed /> tags
+     * into the editor's custom block format so the YoutubeBlock renderer picks them up.
+     */
+    public static function mdxToEditorHtml(?string $mdx): string
+    {
+        if (blank($mdx)) {
+            return '';
+        }
+
+        $processed = preg_replace_callback(
+            '/<YoutubeEmbed\b([^>]*)\/?\s*>/i',
+            function (array $match): string {
+                $attrs = $match[1];
+                preg_match('/\burl=["\']([^"\']+)["\']/i', $attrs, $url);
+                preg_match('/\btitle=["\']([^"\']+)["\']/i', $attrs, $title);
+
+                $config = ['url' => $url[1] ?? ''];
+
+                if (! empty($title[1])) {
+                    $config['caption'] = $title[1];
+                }
+
+                return '<div data-type="customBlock" data-id="youtube" data-config="'
+                    .htmlspecialchars(json_encode($config), ENT_QUOTES)
+                    .'"></div>';
+            },
+            $mdx,
+        );
+
+        $html = Str::markdown($processed);
+
+        return preg_replace(
+            '#(<img[^>]+src=["\'])/src/assets/images/#i',
+            '$1/images/',
+            $html,
+        );
+    }
+
+    /**
      * Render markdown to HTML and extract a table of contents from h2/h3/h4 headings.
      *
      * @return array{html: string, toc: list<array{level: int, text: string, id: string}>}
