@@ -13,11 +13,17 @@
 <body class="bg-root flex min-h-screen flex-col mx-auto">
     <x-header />
     <main class="w-full max-w-[70%] flex-1 mx-auto">
-        <div class="py-8 text-text text-3xl font-bold">
-            {{$title}}
-            <div class="pt-1 text-base font-normal">
-                {{$description}}
-            </div>
+        <div class="flex flex-col gap-y-2 pt-4">
+            @if($title)
+                <span class="py-8 text-text text-3xl font-bold">
+                    {{$title}}
+                </span>
+            @endif
+            @if($description)
+                <span class="text-base font-normal">
+                    {{$description}}
+                </span>
+            @endif
         </div>
         {{ $slot }}
     </main>

@@ -3,7 +3,7 @@
     $heroImage = $post->image ? asset('images/'.$post->image) : null;
 @endphp
 
-<x-layout :title="$post->title">
+<x-layout>
     <article class="mx-auto max-w-6xl">
         @if ($heroImage)
             <div class="mb-8 overflow-hidden rounded-2xl">
@@ -16,62 +16,63 @@
             </div>
         @endif
 
-        <div class="mx-auto flex max-w-2xl gap-x-10 lg:max-w-5xl">
+        <div class="flex flex-col gap-10 lg:flex-row lg:gap-x-12">
             {{--Content--}}
-            <div class="w-full flex-1">
-                <div class="prose">
+            <div class="min-w-0 flex-1">
+                <div class="prose dark:prose-invert max-w-none flex flex-col gap-y-0.5">
                     <time class="text-text/60 text-sm tabular-nums">
                         {{ $post->pubDate->format('F j, Y') }}
                     </time>
 
-                    <h1 class="text-text mt-2 text-4xl leading-tight font-bold sm:text-5xl">
+                    <span class="text-text text-4xl font-bold sm:text-5xl">
                         {{ $post->title }}
-                    </h1>
+                    </span>
 
                     @if ($post->description)
-                        <p class="text-text/80 mt-4 text-lg leading-relaxed">
+                        <span class="text-gray-300/80 text-lg">
                             {{ $post->description }}
-                        </p>
+                        </span>
                     @endif
 
-                    <div class="text-text">
+                    <div class="dark:prose-invert">
                         {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($post->content)->customBlocks([\App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YoutubeBlock::class]) }}
                     </div>
                 </div>
             </div>
-            {{-- Info and TOC --}}
-            <div class="w-66 lg:block gap-y-4 flex-col flex">
-                @if ($post->category)
-                    <div>
-                        <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">Category</h3>
-                        <div class="mt-2 flex flex-wrap gap-2">
-                            <x-filament::badge color="info">
-                                {{ $post->category }}
-                            </x-filament::badge>
-                        </div>
-                    </div>
-                @endif
 
-                @if (!empty($post->tags))
-                    <div>
-                        <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">Tags</h3>
-                        @foreach($post->tags as $tag )
+            {{-- Info and TOC --}}
+            <aside class="order-first lg:order-last lg:w-64 lg:shrink-0">
+                <div class="flex flex-col gap-y-6 lg:sticky lg:top-16">
+                    @if ($post->category)
+                        <div>
+                            <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">Category</h3>
                             <div class="mt-2 flex flex-wrap gap-2">
-                                <x-filament::badge color="gray">
-                                    {{ $tag }}
+                                <x-filament::badge color="info">
+                                    {{ $post->category }}
                                 </x-filament::badge>
                             </div>
-                        @endforeach
-                    </div>
-                @endif
+                        </div>
+                    @endif
 
-                <div class="sticky top-16">
-                    <div class="text-sm/6 font-semibold text-gray-950 dark:text-white">
-                        On this page
+                    @if (! empty($post->tags))
+                        <div>
+                            <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">Tags</h3>
+                            <div class="mt-2 flex flex-wrap gap-2">
+                                @foreach ($post->tags as $tag)
+                                    <x-filament::badge color="gray">
+                                        {{ $tag }}
+                                    </x-filament::badge>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="hidden lg:block">
+                        <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">On this page</h3>
+                        {{--TOC--}}
                     </div>
-                    {{--TOC--}}
                 </div>
-            </div>
+            </aside>
         </div>
     </article>
 </x-layout>
