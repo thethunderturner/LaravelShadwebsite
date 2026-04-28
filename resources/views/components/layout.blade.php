@@ -12,7 +12,7 @@
 </head>
 <body class="bg-root flex min-h-screen flex-col mx-auto">
     <x-header />
-    <main class="mx-auto w-full max-w-[70%] flex-1 px-4 sm:px-6 lg:px-8">
+    <main class="mx-auto w-full sm:max-w-[70%] max-w-full flex-1 px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-y-2 pt-4">
             @if($title)
                 <span class="py-8 text-text text-3xl font-bold">
