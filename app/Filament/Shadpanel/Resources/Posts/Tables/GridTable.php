@@ -26,7 +26,7 @@ class GridTable
                 if ($livewire instanceof Page) {
                     return PostResource::getUrl('view', ['record' => $record]);
                 } else {
-                    return route('blog.show', ['record' => $record]);
+                    return route('blog.show', $record);
                 }
             })
             ->columns([
