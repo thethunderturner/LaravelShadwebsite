@@ -33,11 +33,14 @@
                             {{ $post->description }}
                         </p>
                     @endif
-                    {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($post->content)->customBlocks([\App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YoutubeBlock::class]) }}
+
+                    <div class="text-text">
+                        {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($post->content)->customBlocks([\App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YoutubeBlock::class]) }}
+                    </div>
                 </div>
             </div>
             {{-- Info and TOC --}}
-            <div class="w-66 lg:block">
+            <div class="w-66 lg:block gap-y-4 flex-col flex">
                 @if ($post->category)
                     <div>
                         <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">Category</h3>
@@ -46,6 +49,19 @@
                                 {{ $post->category }}
                             </x-filament::badge>
                         </div>
+                    </div>
+                @endif
+
+                @if (!empty($post->tags))
+                    <div>
+                        <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">Tags</h3>
+                        @foreach($post->tags as $tag )
+                            <div class="mt-2 flex flex-wrap gap-2">
+                                <x-filament::badge color="gray">
+                                    {{ $tag }}
+                                </x-filament::badge>
+                            </div>
+                        @endforeach
                     </div>
                 @endif
 
