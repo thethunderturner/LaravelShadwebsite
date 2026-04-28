@@ -1,5 +1,5 @@
 <header class="border-border bg-header sticky top-0 z-50 w-full border-b">
-    <nav class="mx-auto flex h-16 w-full sm:max-w-[70%] max-w-full items-center justify-between px-4 sm:px-6 lg:px-8">
+    <nav class="mx-auto flex h-16 w-full max-w-465 items-center justify-between px-4 sm:px-6 lg:px-8">
         <div class="hidden flex-row gap-x-3 lg:flex">
             {{-- Simple pages --}}
             @foreach (config('navigation.pages') as $item)
