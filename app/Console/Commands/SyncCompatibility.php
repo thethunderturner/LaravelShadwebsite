@@ -175,7 +175,8 @@ class SyncCompatibility extends Command
 
     private function syncImagesAndMetadata(): void
     {
-        $dir = public_path(self::IMAGE_DIR);
+        // because of cpanel. I hate this...
+        $dir = env('CUSA_IMAGE_PATH', public_path(self::IMAGE_DIR));
         if (! is_dir($dir) && ! mkdir($dir, 0755, true) && ! is_dir($dir)) {
             $this->error("Image dir not writable: {$dir}");
 
