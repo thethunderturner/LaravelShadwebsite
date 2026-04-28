@@ -57,7 +57,21 @@ class Markdown
             return ['html' => '', 'toc' => []];
         }
 
-        $html = Str::markdown($markdown);
+        return self::extractToc(Str::markdown($markdown));
+    }
+
+    /**
+     * Inject slugged ids into existing HTML h2/h3/h4 headings and return the
+     * modified HTML plus a flat table-of-contents list. Use this when content
+     * is already HTML (e.g. from RichContentRenderer).
+     *
+     * @return array{html: string, toc: list<array{level: int, text: string, id: string}>}
+     */
+    public static function extractToc(?string $html): array
+    {
+        if (blank($html)) {
+            return ['html' => '', 'toc' => []];
+        }
 
         $toc = [];
         $slugs = [];

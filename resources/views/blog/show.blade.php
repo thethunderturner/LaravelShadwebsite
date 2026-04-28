@@ -1,6 +1,15 @@
 @php
+    use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YoutubeBlock;
     use App\Support\Markdown;
+    use Filament\Forms\Components\RichEditor\RichContentRenderer;
+
     $heroImage = $post->image ? asset('images/'.$post->image) : null;
+
+    $renderedHtml = RichContentRenderer::make($post->content)
+        ->customBlocks([YoutubeBlock::class])
+        ->toHtml();
+
+    ['html' => $contentHtml, 'toc' => $toc] = Markdown::extractToc($renderedHtml);
 @endphp
 
 <x-layout>
@@ -34,8 +43,8 @@
                         </span>
                     @endif
 
-                    <div class="dark:prose-invert">
-                        {{ \Filament\Forms\Components\RichEditor\RichContentRenderer::make($post->content)->customBlocks([\App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YoutubeBlock::class]) }}
+                    <div class="dark:prose-invert scroll-mt-24">
+                        {!! $contentHtml !!}
                     </div>
                 </div>
             </div>
@@ -67,10 +76,53 @@
                         </div>
                     @endif
 
-                    <div class="hidden lg:block">
-                        <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">On this page</h3>
-                        {{--TOC--}}
-                    </div>
+                    @if (! empty($toc))
+                        <nav
+                            aria-label="Table of contents"
+                            x-data="{
+                                activeId: null,
+                                init() {
+                                    const headings = Array.from(document.querySelectorAll('article h2[id], article h3[id], article h4[id]'));
+                                    if (headings.length === 0) return;
+
+                                    const update = () => {
+                                        const offset = 100;
+                                        let current = headings[0].id;
+                                        for (const h of headings) {
+                                            if (h.getBoundingClientRect().top <= offset) {
+                                                current = h.id;
+                                            } else {
+                                                break;
+                                            }
+                                        }
+                                        this.activeId = current;
+                                    };
+
+                                    update();
+                                    window.addEventListener('scroll', update, { passive: true });
+                                },
+                            }"
+                        >
+                            <h3 class="text-text/50 text-xs font-bold tracking-wider uppercase">On this page</h3>
+                            <ul class="border-border mt-2 flex flex-col gap-y-1.5 border-l">
+                                @foreach ($toc as $item)
+                                    <li @class([
+                                        'pl-3' => $item['level'] === 2,
+                                        'pl-6' => $item['level'] === 3,
+                                        'pl-9' => $item['level'] === 4,
+                                    ])>
+                                        <a
+                                            href="#{{ $item['id'] }}"
+                                            class="block text-sm leading-snug transition"
+                                            :class="activeId === '{{ $item['id'] }}' ? 'font-bold text-white' : 'text-text/70 hover:text-text'"
+                                        >
+                                            {{ $item['text'] }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </nav>
+                    @endif
                 </div>
             </aside>
         </div>
